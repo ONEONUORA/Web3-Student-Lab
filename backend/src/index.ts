@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { requestLogger } from './middleware/requestLogger.js';
 
 dotenv.config();
 
@@ -9,6 +10,7 @@ const port = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json());
+app.use(requestLogger);
 
 app.get('/health', (req: Request, res: Response) => {
   res.json({ status: 'ok', message: 'Web3 Student Lab Backend is running' });
