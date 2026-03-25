@@ -56,4 +56,5 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
         with:
           targets: wasm32-unknown-unknown
+      - run: cargo update -p soroban-sdk
       - run: cargo build --target wasm32-unknown-unknown
