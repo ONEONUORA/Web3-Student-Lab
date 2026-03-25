@@ -15,11 +15,13 @@ If this is something you think you can fix, then fork Web3 Student Lab and creat
 ### Development Tooling
 
 To contribute to the smart contracts, you'll need the following Rust tools:
+
 - **Rust & Cargo**: Follow instructions at [rust-lang.org](https://www.rust-lang.org/tools/install).
 - **Clippy**: Run `rustup component add clippy`.
 - **WASM Target**: Run `rustup target add wasm32-unknown-unknown`.
 
 ### Setup
+
 - Clone your fork locally.
 - Run `npm install` at the root path to set up Git hooks.
 - Run `npm install` in both `frontend` and `backend` directories.
@@ -27,7 +29,7 @@ To contribute to the smart contracts, you'll need the following Rust tools:
 
 ## 4. Implement your fix or feature
 
-At this point, you're ready to make your changes! Feel free to ask for help; everyone is a beginner at first. 
+At this point, you're ready to make your changes! Feel free to ask for help; everyone is a beginner at first.
 
 > [!IMPORTANT]
 > Please review our [Security Best Practices](docs/SECURITY.md) and [CI/CD Pipeline Guide](docs/CICD_GUIDE.md) before making any changes related to secrets, sensitive data, or smart contracts.

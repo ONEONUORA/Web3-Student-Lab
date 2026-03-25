@@ -29,12 +29,13 @@ export const getStudentDashboard = async (studentId: string): Promise<StudentDas
   ]);
 
   // Transform data for the Unified 'Student Profile' view
-  const certificates: Achievement[] = blockchainAchievements.map(achievement => ({
+  const certificates: Achievement[] = blockchainAchievements.map((achievement) => ({
     id: achievement.id,
     title: `Student Achievement: Certified Level ${achievement.status === 'verified' ? 'verified' : 'pending'}`,
-    description: achievement.status === 'verified'
-      ? `On-chain verified: ${achievement.txHash.substring(0, 10)}...`
-      : 'Awaiting blockchain verification',
+    description:
+      achievement.status === 'verified'
+        ? `On-chain verified: ${achievement.txHash.substring(0, 10)}...`
+        : 'Awaiting blockchain verification',
     date: achievement.timestamp,
     type: 'certificate',
     hash: achievement.txHash,
@@ -47,9 +48,7 @@ export const getStudentDashboard = async (studentId: string): Promise<StudentDas
   };
 
   // Aggregated Activity Logging
-  const recentActivity = [
-    `Joined Web3 Student Lab on ${student.createdAt.toLocaleDateString()}`,
-  ];
+  const recentActivity = [`Joined Web3 Student Lab on ${student.createdAt.toLocaleDateString()}`];
 
   if (learningProgress.completedLessons.length > 0) {
     recentActivity.push(`Completed ${learningProgress.completedLessons.length} lessons`);

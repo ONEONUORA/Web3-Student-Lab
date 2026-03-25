@@ -62,6 +62,7 @@ router.post('/', async (req, res) => {
         email,
         firstName,
         lastName,
+        password: 'placeholder_password', // TODO: Implement proper password hashing
       },
     });
 

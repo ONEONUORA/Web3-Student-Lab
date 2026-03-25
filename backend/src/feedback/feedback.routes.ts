@@ -28,7 +28,11 @@ router.post('/', authenticate, async (req: Request, res: Response) => {
       return;
     }
 
-    const feedback = await createFeedback(studentId, { courseId, rating, review: review || undefined });
+    const feedback = await createFeedback(studentId, {
+      courseId,
+      rating,
+      review: review || undefined,
+    });
     res.status(201).json(feedback);
   } catch (error) {
     if (error instanceof Error) {
@@ -56,7 +60,11 @@ router.post('/', authenticate, async (req: Request, res: Response) => {
  */
 router.get('/course/:courseId', async (req: Request, res: Response) => {
   try {
-    const { courseId } = req.params;
+    const { courseId } = req.params as { courseId: string };
+    if (!courseId) {
+      res.status(400).json({ error: 'Course ID is required' });
+      return;
+    }
     const feedback = await getFeedbackByCourse(courseId);
     res.json(feedback);
   } catch (error) {
@@ -75,7 +83,11 @@ router.get('/course/:courseId', async (req: Request, res: Response) => {
  */
 router.get('/course/:courseId/summary', async (req: Request, res: Response) => {
   try {
-    const { courseId } = req.params;
+    const { courseId } = req.params as { courseId: string };
+    if (!courseId) {
+      res.status(400).json({ error: 'Course ID is required' });
+      return;
+    }
     const summary = await getCourseRatingSummary(courseId);
     res.json(summary);
   } catch (error) {
@@ -95,8 +107,11 @@ router.get('/course/:courseId/summary', async (req: Request, res: Response) => {
 router.get('/my-feedback/:courseId', authenticate, async (req: Request, res: Response) => {
   try {
     const studentId = req.user!.id;
-    const { courseId } = req.params;
-
+    const { courseId } = req.params as { courseId: string };
+    if (!courseId) {
+      res.status(400).json({ error: 'Course ID is required' });
+      return;
+    }
     const feedback = await getFeedbackByStudentAndCourse(studentId, courseId);
 
     if (!feedback) {
@@ -118,7 +133,11 @@ router.get('/my-feedback/:courseId', authenticate, async (req: Request, res: Res
 router.put('/:courseId', authenticate, async (req: Request, res: Response) => {
   try {
     const studentId = req.user!.id;
-    const { courseId } = req.params;
+    const { courseId } = req.params as { courseId: string };
+    if (!courseId) {
+      res.status(400).json({ error: 'Course ID is required' });
+      return;
+    }
     const { rating, review }: UpdateFeedbackRequest = req.body;
 
     // Validation
@@ -155,8 +174,11 @@ router.put('/:courseId', authenticate, async (req: Request, res: Response) => {
 router.delete('/:courseId', authenticate, async (req: Request, res: Response) => {
   try {
     const studentId = req.user!.id;
-    const { courseId } = req.params;
-
+    const { courseId } = req.params as { courseId: string };
+    if (!courseId) {
+      res.status(400).json({ error: 'Course ID is required' });
+      return;
+    }
     await deleteFeedback(studentId, courseId);
     res.status(204).send();
   } catch (error) {

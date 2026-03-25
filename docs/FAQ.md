@@ -7,6 +7,7 @@ Welcome! This FAQ is designed to help students quickly resolve common setup issu
 ## 1. Node.js installation errors
 
 ### 1.1 “node: command not found”
+
 - Cause: Node.js is not installed or not in your PATH.
 - Fix:
   - On macOS/Linux: `curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -` then `sudo apt-get install -y nodejs` (Ubuntu/Debian) or use `brew install node` (macOS).
@@ -14,6 +15,7 @@ Welcome! This FAQ is designed to help students quickly resolve common setup issu
   - Verify with: `node --version` and `npm --version`.
 
 ### 1.2 “ERR_PNPM_ADDING_TO_PROJECT” or package manager lock errors
+
 - Cause: run command in wrong directory or with project already using different package manager.
 - Fix:
   - `cd /workspaces/Web3-Student-Lab` first.
@@ -21,6 +23,7 @@ Welcome! This FAQ is designed to help students quickly resolve common setup issu
   - Remove conflicting lock files only if you intentionally switch managers.
 
 ### 1.3 Compatibility issues (Node version too old/new)
+
 - Cause: project requires modern Node version (>=18).
 - Fix:
   - Install `nvm` (macOS/Linux) or `nvm-windows`.
@@ -32,6 +35,7 @@ Welcome! This FAQ is designed to help students quickly resolve common setup issu
 ## 2. Rust installation and toolchain issues
 
 ### 2.1 “command not found: cargo”
+
 - Cause: Rust is not installed or path not loaded.
 - Fix:
   - Run: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`.
@@ -39,6 +43,7 @@ Welcome! This FAQ is designed to help students quickly resolve common setup issu
   - Verify: `rustc --version`, `cargo --version`.
 
 ### 2.2 “failed to parse lockfile” or `cargo build` compile errors
+
 - Cause: stale dependencies or incompatible toolchain.
 - Fix:
   - Update Rust toolchain: `rustup update`.
@@ -46,6 +51,7 @@ Welcome! This FAQ is designed to help students quickly resolve common setup issu
   - Run: `cargo clean && cargo build`.
 
 ### 2.3 WebAssembly/Soroban compile issues (especially in contract path)
+
 - Cause: missing wasm32 target or Soroban CLI.
 - Fix:
   - `rustup target add wasm32-unknown-unknown`.
@@ -56,6 +62,7 @@ Welcome! This FAQ is designed to help students quickly resolve common setup issu
 ## 3. Git installation and common workflows
 
 ### 3.1 “git: command not found”
+
 - Cause: Git not installed.
 - Fix:
   - Ubuntu/Debian: `sudo apt-get update && sudo apt-get install git`.
@@ -63,6 +70,7 @@ Welcome! This FAQ is designed to help students quickly resolve common setup issu
   - Windows: install from https://git-scm.com and restart terminal.
 
 ### 3.2 “fatal: unable to access 'https://...': SSL certificate problem”
+
 - Cause: missing CA certs or corporate proxy.
 - Fix:
   - Ensure `ca-certificates` package is installed (`sudo apt-get install ca-certificates`, `sudo update-ca-certificates`).
@@ -71,6 +79,7 @@ Welcome! This FAQ is designed to help students quickly resolve common setup issu
     - `git config --global https.proxy http://proxy.example.com:8080`
 
 ### 3.3 “error: cannot lock ref ‘refs/heads/main’” or permissions failures
+
 - Cause: concurrent git process or no write permission.
 - Fix:
   - Check no other git commands are running in project.

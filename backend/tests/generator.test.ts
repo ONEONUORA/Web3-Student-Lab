@@ -17,15 +17,15 @@ jest.unstable_mockModule('openai', () => {
                     description: 'A test project description',
                     keyFeatures: ['Feature 1', 'Feature 2'],
                     recommendedTech: ['Node.js', 'React'],
-                    difficulty: 'Intermediate'
-                  })
-                }
-              }
-            ]
-          })
-        }
-      }
-    }))
+                    difficulty: 'Intermediate',
+                  }),
+                },
+              },
+            ],
+          }),
+        },
+      },
+    })),
   };
 });
 
@@ -45,7 +45,7 @@ describe('Generator API Integration Tests', () => {
         .send({
           theme: 'Environment',
           techStack: ['React', 'Solidity'],
-          difficulty: 'Intermediate'
+          difficulty: 'Intermediate',
         })
         .expect(200);
 
@@ -59,7 +59,7 @@ describe('Generator API Integration Tests', () => {
       const response = await request(app)
         .post('/api/generator/generate')
         .send({
-          theme: 'Environment'
+          theme: 'Environment',
           // missing techStack and difficulty
         })
         .expect(400);

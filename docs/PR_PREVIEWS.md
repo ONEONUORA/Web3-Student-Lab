@@ -17,6 +17,7 @@ Pull Request preview deployments give every contributor a live, shareable URL fo
 **How it works:** Connect your GitHub repo once. Vercel automatically builds and deploys every PR to a unique URL (e.g., `web3-student-lab-pr-42.vercel.app`). The GitHub integration posts the URL directly in the PR comment.
 
 **Pros:**
+
 - Zero configuration for most frameworks (Next.js, Vite, CRA, plain HTML)
 - Free Hobby plan covers unlimited preview deployments for public repos
 - Instant HTTPS, global CDN, and automatic teardown when PR closes
@@ -24,6 +25,7 @@ Pull Request preview deployments give every contributor a live, shareable URL fo
 - Supports environment variables per branch
 
 **Cons:**
+
 - Free tier limits team size (1 person on Hobby; upgrade needed for org-wide access)
 - Build minutes are capped on free plans (though generous for small projects)
 - Vendor lock-in — some Vercel-specific features don't translate elsewhere
@@ -37,6 +39,7 @@ Pull Request preview deployments give every contributor a live, shareable URL fo
 **How it works:** Similar to Vercel. Netlify watches your repo and builds a "Deploy Preview" for each PR. The preview URL appears as a GitHub status check.
 
 **Pros:**
+
 - Free Starter plan includes Deploy Previews for public repos
 - Supports a wide range of build tools (same as Vercel)
 - Netlify CMS and Forms are available if needed later
@@ -44,6 +47,7 @@ Pull Request preview deployments give every contributor a live, shareable URL fo
 - Easy rollback to any previous deploy
 
 **Cons:**
+
 - 300 build minutes/month on the free plan (can be tight with active contributors)
 - Slightly more configuration needed compared to Vercel for some frameworks
 - Team collaboration features are paywalled
@@ -57,12 +61,14 @@ Pull Request preview deployments give every contributor a live, shareable URL fo
 **How it works:** A custom GitHub Actions workflow builds the project on every PR push and deploys to a `gh-pages`-style branch or uploads to an S3-compatible bucket / GitHub Pages subfolder.
 
 **Pros:**
+
 - Fully free with no external service dependency
 - Complete control over the build and deploy pipeline
 - Keeps everything within the GitHub ecosystem
 - Good learning opportunity for CI/CD fundamentals
 
 **Cons:**
+
 - Significantly more setup and maintenance work
 - GitHub Pages does not natively support per-PR URLs — workarounds (subfolders, artifacts) are fragile
 - No automatic teardown of old previews without extra scripting
@@ -77,11 +83,13 @@ Pull Request preview deployments give every contributor a live, shareable URL fo
 **How it works:** Cloudflare Pages connects to GitHub and deploys previews on every PR push, similar to Vercel and Netlify, but served from Cloudflare's edge network.
 
 **Pros:**
+
 - Extremely generous free tier (unlimited requests, unlimited bandwidth)
 - Fast global edge delivery
 - No build minute caps
 
 **Cons:**
+
 - Build times can be slower than Vercel/Netlify
 - Less mature GitHub integration (preview comments require manual setup)
 - Ecosystem tooling is less polished for student onboarding
@@ -92,15 +100,15 @@ Pull Request preview deployments give every contributor a live, shareable URL fo
 
 ## Comparison Table
 
-| Feature | Vercel | Netlify | GitHub Actions | Cloudflare Pages |
-|---|---|---|---|---|
-| Free PR previews | ✅ | ✅ | ✅ (manual) | ✅ |
-| Auto PR comment with URL | ✅ | ✅ | ⚠️ (scripted) | ⚠️ (partial) |
-| Zero config for common frameworks | ✅ | ✅ | ❌ | ✅ |
-| Auto teardown on PR close | ✅ | ✅ | ❌ | ✅ |
-| Build minutes (free) | Generous | 300/month | 2000 min/month | Unlimited |
-| Setup time | ~5 min | ~10 min | 1–3 hours | ~15 min |
-| Best for learning CI/CD | ❌ | ❌ | ✅ | ❌ |
+| Feature                           | Vercel   | Netlify   | GitHub Actions | Cloudflare Pages |
+| --------------------------------- | -------- | --------- | -------------- | ---------------- |
+| Free PR previews                  | ✅       | ✅        | ✅ (manual)    | ✅               |
+| Auto PR comment with URL          | ✅       | ✅        | ⚠️ (scripted)  | ⚠️ (partial)     |
+| Zero config for common frameworks | ✅       | ✅        | ❌             | ✅               |
+| Auto teardown on PR close         | ✅       | ✅        | ❌             | ✅               |
+| Build minutes (free)              | Generous | 300/month | 2000 min/month | Unlimited        |
+| Setup time                        | ~5 min   | ~10 min   | 1–3 hours      | ~15 min          |
+| Best for learning CI/CD           | ❌       | ❌        | ✅             | ❌               |
 
 ---
 
@@ -137,6 +145,7 @@ Netlify is a solid runner-up and can be substituted if the team hits Vercel's fr
 ### Step 2 — Enable GitHub Integration
 
 Vercel installs a GitHub App automatically during the import. This app:
+
 - Triggers a build on every push to any branch
 - Posts a preview URL as a PR comment and status check
 - Marks the check as failed if the build errors out

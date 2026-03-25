@@ -23,15 +23,18 @@ The platform provides **interactive tools, coding environments, and guided learn
 ## 🛠 Technology Stack
 
 **Frontend**
+
 - React / Next.js
 - Tailwind CSS
 - Monaco Editor
 
 **Backend**
+
 - Node.js / Express
 - PostgreSQL
 
 **Blockchain Integration**
+
 - Stellar SDK
 - Soroban Smart Contracts
 
@@ -46,21 +49,27 @@ timeline
 ```
 
 ### Phase 1: Discovery 🔍
+
 **Objective:** Define the core platform architecture, validate learning mechanisms, and design the initial curriculum.
+
 - **Milestones:**
   - [x] Initial repository setup and architecture planning
   - [ ] Define Soroban/Stellar learning roadmap
   - [ ] UI/UX wireframes for the Blockchain Simulator
 
 ### Phase 2: Development 🛠️
+
 **Objective:** Build out the core modules, integrate blockchain functionalities, and develop the interactive playground.
+
 - **Milestones:**
   - [ ] Implement Next.js + Tailwind frontend
   - [ ] Integrate Monaco Editor for Smart Contract Playground
   - [ ] Set up PostgreSQL and Node.js backend infrastructure
 
 ### Phase 3: Deployment 🚀
+
 **Objective:** Launch the MVP, onboard the first cohort of students, and gather metrics for future iterations.
+
 - **Milestones:**
   - [ ] Deploy backend and database to cloud infrastructure
   - [ ] Host the frontend application
@@ -89,10 +98,12 @@ web3-student-lab/
 The easiest way to set up the local development environment (backend and database) is using Docker Compose.
 
 ### Prerequisites
+
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
 ### Launching the Environment
+
 1. Clone the repository and navigate to the root directory.
 2. Run the following command:
    ```bash
@@ -102,6 +113,7 @@ The easiest way to set up the local development environment (backend and databas
 4. The PostgreSQL database will be accessible at `localhost:5432`.
 
 ### Useful Commands
+
 - **Stop the environment**: `docker compose down`
 - **View logs**: `docker compose logs -f`
 - **Restart a specific service**: `docker compose restart backend`
@@ -113,6 +125,7 @@ We love our contributors! This project is being built for students, by students 
 > **Important:** Please add an ETA (no more than 2 days) when expressing interest in an issue to help us keep development moving quickly.
 
 To start contributing:
+
 1. Read our [Contribution Guidelines](CONTRIBUTING.md).
 2. Review our [Security Best Practices](docs/SECURITY.md).
 3. Read the [CI/CD Pipeline Guide](docs/CICD_GUIDE.md).

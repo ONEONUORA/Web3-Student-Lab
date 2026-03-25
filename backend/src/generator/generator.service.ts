@@ -23,7 +23,7 @@ export class GeneratorService {
   async generateProjectIdea(
     theme: string,
     techStack: string[],
-    difficulty: string
+    difficulty: string,
   ): Promise<ProjectIdea> {
     const prompt = `
       As an expert Web3 and Software Architect, generate a unique and innovative hackathon project idea.
@@ -46,10 +46,14 @@ export class GeneratorService {
       const response = await this.openai.chat.completions.create({
         model: 'gpt-4o-mini',
         messages: [
-          { role: 'system', content: 'You are a helpful assistant that generates innovative hackathon project ideas in JSON format.' },
-          { role: 'user', content: prompt }
+          {
+            role: 'system',
+            content:
+              'You are a helpful assistant that generates innovative hackathon project ideas in JSON format.',
+          },
+          { role: 'user', content: prompt },
         ],
-        response_format: { type: "json_object" }
+        response_format: { type: 'json_object' },
       });
 
       const content = response.choices[0]?.message?.content;

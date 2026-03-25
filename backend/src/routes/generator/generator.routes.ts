@@ -18,11 +18,7 @@ router.post('/generate', async (req: Request, res: Response) => {
       return;
     }
 
-    const projectIdea = await generatorService.generateProjectIdea(
-      theme,
-      techStack,
-      difficulty
-    );
+    const projectIdea = await generatorService.generateProjectIdea(theme, techStack, difficulty);
 
     res.json({ projectIdea });
   } catch (error) {

@@ -10,10 +10,10 @@ const router = Router();
  */
 router.get('/:studentId', async (req: Request, res: Response) => {
   try {
-    const studentId = req.params.studentId;
+    const { studentId } = req.params;
 
-    if (!studentId) {
-      res.status(400).json({ error: 'Student ID is required' });
+    if (!studentId || typeof studentId !== 'string') {
+      res.status(400).json({ error: 'Student ID is required and must be a string' });
       return;
     }
 

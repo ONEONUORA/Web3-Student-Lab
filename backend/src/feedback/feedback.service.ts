@@ -24,7 +24,7 @@ const validateRating = (rating: number): void => {
  * Format a feedback database record into a response object
  */
 export const formatFeedbackResponse = (
-  feedback: FeedbackWithStudent | Feedback
+  feedback: FeedbackWithStudent | Feedback,
 ): FeedbackResponse => {
   const response: FeedbackResponse = {
     id: feedback.id,
@@ -53,7 +53,7 @@ export const formatFeedbackResponse = (
  */
 export const createFeedback = async (
   studentId: string,
-  data: CreateFeedbackRequest
+  data: CreateFeedbackRequest,
 ): Promise<FeedbackResponse> => {
   const { courseId, rating, review } = data;
 
@@ -124,9 +124,7 @@ export const createFeedback = async (
 /**
  * Get all feedback for a specific course
  */
-export const getFeedbackByCourse = async (
-  courseId: string
-): Promise<FeedbackResponse[]> => {
+export const getFeedbackByCourse = async (courseId: string): Promise<FeedbackResponse[]> => {
   // Check if course exists
   const course = await prisma.course.findUnique({
     where: { id: courseId },
@@ -161,7 +159,7 @@ export const getFeedbackByCourse = async (
  */
 export const getFeedbackByStudentAndCourse = async (
   studentId: string,
-  courseId: string
+  courseId: string,
 ): Promise<FeedbackResponse | null> => {
   const feedback = await prisma.feedback.findUnique({
     where: {
@@ -195,7 +193,7 @@ export const getFeedbackByStudentAndCourse = async (
 export const updateFeedback = async (
   studentId: string,
   courseId: string,
-  data: UpdateFeedbackRequest
+  data: UpdateFeedbackRequest,
 ): Promise<FeedbackResponse> => {
   const { rating, review } = data;
 
@@ -252,10 +250,7 @@ export const updateFeedback = async (
 /**
  * Delete feedback
  */
-export const deleteFeedback = async (
-  studentId: string,
-  courseId: string
-): Promise<void> => {
+export const deleteFeedback = async (studentId: string, courseId: string): Promise<void> => {
   // Check if feedback exists
   const existingFeedback = await prisma.feedback.findUnique({
     where: {
@@ -283,9 +278,7 @@ export const deleteFeedback = async (
 /**
  * Get rating summary for a course
  */
-export const getCourseRatingSummary = async (
-  courseId: string
-): Promise<CourseRatingSummary> => {
+export const getCourseRatingSummary = async (courseId: string): Promise<CourseRatingSummary> => {
   // Check if course exists
   const course = await prisma.course.findUnique({
     where: { id: courseId },

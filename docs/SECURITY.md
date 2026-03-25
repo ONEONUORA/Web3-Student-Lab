@@ -18,11 +18,13 @@ This document outlines the security guidelines for developers contributing to th
 ## Secure Coding Practices
 
 ### General
+
 - **Input Validation**: Always validate and sanitize user input to prevent common vulnerabilities like XSS and Injection.
 - **Dependency Management**: Regularly update dependencies and use tools like `npm audit` or `snyk` to check for known vulnerabilities.
 - **Principle of Least Privilege**: Grant only the minimum necessary permissions to services and users.
 
 ### Smart Contracts
+
 - **Reentrancy Protection**: Use `ReentrancyGuard` or the checks-effects-interactions pattern.
 - **Integer Overflows**: Use Solidity 0.8+ or `SafeMath` for older versions.
 - **Access Control**: Use `Ownable` or `AccessControl` to restrict sensitive functions.
@@ -33,4 +35,5 @@ This document outlines the security guidelines for developers contributing to th
 For information on how to report vulnerabilities or see our security advisories, please refer to our [GitHub Security Policy](https://github.com/StellarDevHub/Web3-Student-Lab/security/policy).
 
 ---
-*Last Updated: 2026-03-24*
+
+_Last Updated: 2026-03-24_

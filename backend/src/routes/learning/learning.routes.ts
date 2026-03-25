@@ -66,9 +66,7 @@ router.get('/modules', (req: Request, res: Response) => {
     if (difficulty) {
       filteredModules = modules.map((mod) => ({
         ...mod,
-        lessons: mod.lessons.filter(
-          (lesson) => lesson.difficulty === difficulty
-        ),
+        lessons: mod.lessons.filter((lesson) => lesson.difficulty === difficulty),
       }));
     }
 
@@ -146,9 +144,7 @@ router.post('/progress/:userId/complete', async (req: Request, res: Response) =>
     }
 
     // Verify lesson exists
-    const lessonExists = modules.some((mod) =>
-      mod.lessons.some((l) => l.id === lessonId)
-    );
+    const lessonExists = modules.some((mod) => mod.lessons.some((l) => l.id === lessonId));
 
     if (!lessonExists) {
       res.status(404).json({ error: 'Lesson not found' });
@@ -157,7 +153,7 @@ router.post('/progress/:userId/complete', async (req: Request, res: Response) =>
 
     // Get user progress from DB
     let progressRecord = await prisma.learningProgress.findUnique({
-      where: { userId }
+      where: { userId },
     });
 
     let completedLessons = progressRecord ? progressRecord.completedLessons : [];
@@ -168,13 +164,8 @@ router.post('/progress/:userId/complete', async (req: Request, res: Response) =>
       completedLessons.push(lessonId);
 
       // Calculate new percentage
-      const totalLessons = modules.reduce(
-        (acc, mod) => acc + mod.lessons.length,
-        0
-      );
-      percentage = Math.round(
-        (completedLessons.length / totalLessons) * 100
-      );
+      const totalLessons = modules.reduce((acc, mod) => acc + mod.lessons.length, 0);
+      percentage = Math.round((completedLessons.length / totalLessons) * 100);
     }
 
     // Save back to DB
@@ -182,14 +173,14 @@ router.post('/progress/:userId/complete', async (req: Request, res: Response) =>
       where: { userId },
       update: {
         completedLessons,
-        percentage
+        percentage,
       },
       create: {
         userId,
         completedLessons,
         currentModule: 'mod-1',
-        percentage
-      }
+        percentage,
+      },
     });
 
     res.json({ progress, message: 'Lesson marked as complete' });

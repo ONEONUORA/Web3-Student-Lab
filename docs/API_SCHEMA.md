@@ -56,32 +56,32 @@ All error responses follow this structure:
 
 ## HTTP Status Codes
 
-| Status Code | Description | Usage |
-|-------------|-------------|-------|
-| 200 | OK | Successful GET, PUT, PATCH requests |
-| 201 | Created | Successful POST requests that create resources |
-| 204 | No Content | Successful DELETE requests |
-| 400 | Bad Request | Invalid request data or parameters |
-| 401 | Unauthorized | Missing or invalid authentication |
-| 403 | Forbidden | Valid authentication but insufficient permissions |
-| 404 | Not Found | Resource not found |
-| 409 | Conflict | Resource already exists or conflict |
-| 422 | Unprocessable Entity | Valid request format but invalid data |
-| 500 | Internal Server Error | Server-side errors |
+| Status Code | Description           | Usage                                             |
+| ----------- | --------------------- | ------------------------------------------------- |
+| 200         | OK                    | Successful GET, PUT, PATCH requests               |
+| 201         | Created               | Successful POST requests that create resources    |
+| 204         | No Content            | Successful DELETE requests                        |
+| 400         | Bad Request           | Invalid request data or parameters                |
+| 401         | Unauthorized          | Missing or invalid authentication                 |
+| 403         | Forbidden             | Valid authentication but insufficient permissions |
+| 404         | Not Found             | Resource not found                                |
+| 409         | Conflict              | Resource already exists or conflict               |
+| 422         | Unprocessable Entity  | Valid request format but invalid data             |
+| 500         | Internal Server Error | Server-side errors                                |
 
 ## Common Error Codes
 
-| Error Code | HTTP Status | Description |
-|------------|-------------|-------------|
-| `VALIDATION_ERROR` | 400 | Request validation failed |
-| `UNAUTHORIZED` | 401 | Authentication required |
-| `FORBIDDEN` | 403 | Insufficient permissions |
-| `NOT_FOUND` | 404 | Resource not found |
-| `ALREADY_EXISTS` | 409 | Resource already exists |
-| `INVALID_CREDENTIALS` | 401 | Invalid login credentials |
-| `TOKEN_EXPIRED` | 401 | JWT token has expired |
-| `INVALID_TOKEN` | 401 | JWT token is invalid |
-| `INTERNAL_ERROR` | 500 | Unexpected server error |
+| Error Code            | HTTP Status | Description               |
+| --------------------- | ----------- | ------------------------- |
+| `VALIDATION_ERROR`    | 400         | Request validation failed |
+| `UNAUTHORIZED`        | 401         | Authentication required   |
+| `FORBIDDEN`           | 403         | Insufficient permissions  |
+| `NOT_FOUND`           | 404         | Resource not found        |
+| `ALREADY_EXISTS`      | 409         | Resource already exists   |
+| `INVALID_CREDENTIALS` | 401         | Invalid login credentials |
+| `TOKEN_EXPIRED`       | 401         | JWT token has expired     |
+| `INVALID_TOKEN`       | 401         | JWT token is invalid      |
+| `INTERNAL_ERROR`      | 500         | Unexpected server error   |
 
 ## Endpoint Examples
 
@@ -90,6 +90,7 @@ All error responses follow this structure:
 #### POST /api/auth/register
 
 **Success Response (201):**
+
 ```json
 {
   "success": true,
@@ -107,6 +108,7 @@ All error responses follow this structure:
 ```
 
 **Error Response (400):**
+
 ```json
 {
   "success": false,
@@ -122,6 +124,7 @@ All error responses follow this structure:
 #### POST /api/auth/login
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -139,6 +142,7 @@ All error responses follow this structure:
 ```
 
 **Error Response (401):**
+
 ```json
 {
   "success": false,
@@ -155,6 +159,7 @@ All error responses follow this structure:
 #### GET /api/courses
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -184,6 +189,7 @@ All error responses follow this structure:
 #### GET /api/courses/:id
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -209,6 +215,7 @@ All error responses follow this structure:
 ```
 
 **Error Response (404):**
+
 ```json
 {
   "success": false,
@@ -225,6 +232,7 @@ All error responses follow this structure:
 #### POST /api/feedback
 
 **Success Response (201):**
+
 ```json
 {
   "success": true,
@@ -245,6 +253,7 @@ All error responses follow this structure:
 #### GET /api/feedback/course/:courseId
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,
@@ -287,6 +296,7 @@ All error responses follow this structure:
 #### GET /health
 
 **Success Response (200):**
+
 ```json
 {
   "success": true,

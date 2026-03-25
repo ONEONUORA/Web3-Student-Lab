@@ -5,6 +5,9 @@ import certificatesRouter from './certificates.js';
 import coursesRouter from './courses.js';
 import enrollmentsRouter from './enrollments.js';
 import studentsRouter from './students.js';
+import authRoutes from './auth/auth.routes.js';
+import learningRoutes from './learning/learning.routes.js';
+import generatorRoutes from './generator/generator.routes.js';
 
 const router = Router();
 
@@ -15,15 +18,13 @@ router.use('/certificates', certificatesRouter);
 router.use('/enrollments', enrollmentsRouter);
 router.use('/feedback', feedbackRouter);
 router.use('/dashboard', dashboardRouter);
+router.use('/auth', authRoutes);
+router.use('/learning', learningRoutes);
+router.use('/generator', generatorRoutes);
 
 // Placeholder routes for future features
-// These can be replaced with actual routers as features are developed
 router.use('/blockchain', (req: any, res: any) => {
   res.json({ message: 'Blockchain feature - Full integration in progress' });
-});
-
-router.use('/generator', (req: any, res: any) => {
-  res.json({ message: 'Generator feature - Coming soon' });
 });
 
 export default router;

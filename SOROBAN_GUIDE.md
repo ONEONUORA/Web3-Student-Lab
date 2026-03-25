@@ -60,7 +60,7 @@ Here is the end-to-end flow:
 | Frontend / Client | Your app or CLI that triggers contract calls    |
 | Soroban Contract  | Business logic written in Rust                  |
 | WASM Runtime      | Executes compiled contracts in a secure sandbox |
-| Stellar Ledger   | Stores contract state and transaction history   |
+| Stellar Ledger    | Stores contract state and transaction history   |
 
 ### Contract Lifecycle
 
@@ -208,7 +208,7 @@ Keep these principles in mind as you build:
 - **Study token contracts** — understand the Stellar Asset Contract (SAC) standard
 - **Build a frontend** — connect your contract to a web app using @stellar/stellar-sdk
 - **Write tests** — add unit tests using Soroban's built-in test environment
-Browse examples — study real contracts at soroban-examples
+  Browse examples — study real contracts at soroban-examples
 
 ## Official Resources
 

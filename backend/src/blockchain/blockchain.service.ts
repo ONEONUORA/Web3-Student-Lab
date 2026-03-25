@@ -15,7 +15,7 @@ export const getStudentAchievements = async (studentId: string): Promise<Blockch
   const certificates = await prisma.certificate.findMany({
     where: {
       studentId,
-      status: 'issued'
+      status: 'issued',
     },
   });
 
