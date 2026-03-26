@@ -3,13 +3,22 @@ import { Router } from 'express';
 const router = Router();
 
 // Robust Mock Database for 100% Demo Uptime
-let certificates: any[] = [];
+interface MockCertificate {
+  id: string;
+  studentId: string;
+  courseId: string;
+  issuedAt: Date;
+  certificateHash: string | null;
+  status: string;
+}
+
+let certificates: MockCertificate[] = [];
 
 // GET /api/certificates - Get all certificates
 router.get('/', async (req, res) => {
   try {
     res.json(certificates);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch certificates' });
   }
 });
@@ -25,7 +34,7 @@ router.get('/:id', async (req, res) => {
     }
 
     res.json(certificate);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch certificate' });
   }
 });
@@ -36,7 +45,7 @@ router.get('/student/:studentId', async (req, res) => {
     const { studentId } = req.params;
     const studentCerts = certificates.filter(c => c.studentId === studentId);
     res.json(studentCerts);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch student certificates' });
   }
 });
@@ -73,7 +82,7 @@ router.post('/', async (req, res) => {
     
     certificates.push(newCertificate);
     res.status(201).json(newCertificate);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to issue certificate' });
   }
 });
@@ -91,7 +100,7 @@ router.put('/:id', async (req, res) => {
 
     Object.assign(certificates[index], { status, certificateHash });
     res.json(certificates[index]);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to update certificate' });
   }
 });
@@ -102,7 +111,7 @@ router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     certificates = certificates.filter(c => c.id !== id);
     res.status(204).send();
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to revoke certificate' });
   }
 });

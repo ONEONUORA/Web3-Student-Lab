@@ -9,7 +9,7 @@ let enrollments: any[] = [];
 router.get('/', async (req, res) => {
   try {
     res.json(enrollments);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch enrollments' });
   }
 });
@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
     }
 
     res.json(enrollment);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch enrollment' });
   }
 });
@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
     
     enrollments.push(newEnrollment);
     res.status(201).json(newEnrollment);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to enroll student' });
   }
 });
@@ -73,7 +73,7 @@ router.put('/:id', async (req, res) => {
 
     enrollments[index] = { ...enrollments[index], status };
     res.json(enrollments[index]);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to update enrollment' });
   }
 });
@@ -84,7 +84,7 @@ router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     enrollments = enrollments.filter(e => e.id !== id);
     res.status(204).send();
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to unenroll student' });
   }
 });

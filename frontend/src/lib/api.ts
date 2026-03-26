@@ -133,7 +133,7 @@ export const certificatesAPI = {
     return response.data;
   },
 
-  verifyOnChain: async (certificateId: string): Promise<Record<string, unknown>> => {
+  verifyOnChain: async (certificateId: string): Promise<{ verified: boolean; hash?: string }> => {
     const response = await apiClient.get(`/certificates/${certificateId}/verify`);
     return response.data;
   },
@@ -163,6 +163,11 @@ export const enrollmentsAPI = {
 };
 
 // Feedback APIs
+export interface FeedbackSummary {
+  averageRating: number;
+  totalReviews: number;
+}
+
 export const feedbackAPI = {
   submit: async (data: { courseId: string; rating: number; review?: string }): Promise<Feedback> => {
     const response = await apiClient.post('/feedback', data);
@@ -174,20 +179,36 @@ export const feedbackAPI = {
     return response.data;
   },
 
-  getSummary: async (courseId: string): Promise<Record<string, unknown>> => {
+  getSummary: async (courseId: string): Promise<FeedbackSummary> => {
     const response = await apiClient.get(`/feedback/course/${courseId}/summary`);
     return response.data;
   },
 };
 
 // Dashboard APIs
+
+export interface DashboardStats {
+  coursesCount: number;
+  studentsCount: number;
+  certificatesCount: number;
+  verificationRate: string;
+}
+
+export interface StudentDashboard {
+  userId: string;
+  progress: Record<string, unknown>;
+  certificates: Record<string, unknown>[];
+  tokenBalance: Record<string, unknown>;
+  recentActivity: string[];
+}
+
 export const dashboardAPI = {
-  getStats: async (): Promise<Record<string, unknown>> => {
+  getStats: async (): Promise<DashboardStats> => {
     const response = await apiClient.get('/dashboard/stats');
     return response.data;
   },
 
-  getStudentDashboard: async (studentId: string): Promise<Record<string, unknown>> => {
+  getStudentDashboard: async (studentId: string): Promise<StudentDashboard> => {
     const response = await apiClient.get(`/dashboard/student/${studentId}`);
     return response.data;
   },

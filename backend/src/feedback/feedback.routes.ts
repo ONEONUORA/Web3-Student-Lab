@@ -34,7 +34,7 @@ router.post('/', authenticate, async (req: Request, res: Response) => {
       review: review || undefined,
     });
     res.status(201).json(feedback);
-  } catch (error) {
+  } catch {
     if (error instanceof Error) {
       if (error.message === 'Course not found') {
         res.status(404).json({ error: error.message });
@@ -67,7 +67,7 @@ router.get('/course/:courseId', async (req: Request, res: Response) => {
     }
     const feedback = await getFeedbackByCourse(courseId);
     res.json(feedback);
-  } catch (error) {
+  } catch {
     if (error instanceof Error && error.message === 'Course not found') {
       res.status(404).json({ error: error.message });
       return;
@@ -90,7 +90,7 @@ router.get('/course/:courseId/summary', async (req: Request, res: Response) => {
     }
     const summary = await getCourseRatingSummary(courseId);
     res.json(summary);
-  } catch (error) {
+  } catch {
     if (error instanceof Error && error.message === 'Course not found') {
       res.status(404).json({ error: error.message });
       return;
@@ -120,7 +120,7 @@ router.get('/my-feedback/:courseId', authenticate, async (req: Request, res: Res
     }
 
     res.json(feedback);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch feedback' });
   }
 });
@@ -151,7 +151,7 @@ router.put('/:courseId', authenticate, async (req: Request, res: Response) => {
       review: review || undefined,
     });
     res.json(feedback);
-  } catch (error) {
+  } catch {
     if (error instanceof Error) {
       if (error.message === 'Feedback not found') {
         res.status(404).json({ error: error.message });
@@ -181,7 +181,7 @@ router.delete('/:courseId', authenticate, async (req: Request, res: Response) =>
     }
     await deleteFeedback(studentId, courseId);
     res.status(204).send();
-  } catch (error) {
+  } catch {
     if (error instanceof Error && error.message === 'Feedback not found') {
       res.status(404).json({ error: error.message });
       return;

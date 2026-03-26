@@ -18,7 +18,7 @@ export const getStudentDashboard = async (studentId: string): Promise<StudentDas
         certificates: true,
       },
     });
-  } catch (dbError) {
+  } catch {
     console.warn(`Database unreachable for student ${studentId}, using mock profile`);
   }
 
@@ -119,7 +119,7 @@ export const getStats = async () => {
       certificatesCount,
       verificationRate: '100%',
     };
-  } catch (error) {
+  } catch {
     console.warn('Database unreachable, returning mock dashboard stats');
     // Mock statistical data for 'Connection' verification
     return {

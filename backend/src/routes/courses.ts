@@ -37,7 +37,7 @@ let courses = [
 router.get('/', async (req, res) => {
   try {
     res.json(courses);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch courses' });
   }
 });
@@ -53,7 +53,7 @@ router.get('/:id', async (req, res) => {
     }
 
     res.json(course);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch course' });
   }
 });
@@ -79,7 +79,7 @@ router.post('/', async (req, res) => {
     
     courses.push(newCourse);
     res.status(201).json(newCourse);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to create course' });
   }
 });
@@ -100,7 +100,7 @@ router.put('/:id', async (req, res) => {
       Object.assign(targetCourse, { title, description, instructor, credits, updatedAt: new Date().toISOString() });
     }
     res.json(targetCourse);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to update course' });
   }
 });
@@ -111,7 +111,7 @@ router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     courses = courses.filter(c => c.id !== id);
     res.status(204).send();
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to delete course' });
   }
 });

@@ -78,7 +78,7 @@ export default function IdeasPage() {
                 </div>
 
                 <div className="pt-8 opacity-50 italic text-xs text-gray-500 border-t border-white/5 font-light leading-relaxed">
-                   "Leverage {idea.tech} within the {idea.sector} ecosystem to effectively {idea.goal.toLowerCase()} using the Stellar Network's high-speed consensus."
+                   {`"Leverage ${idea.tech} within the ${idea.sector} ecosystem to effectively ${idea.goal.toLowerCase()} using the Stellar Network's high-speed consensus."`}
                 </div>
              </div>
            )}

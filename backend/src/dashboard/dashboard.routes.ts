@@ -12,7 +12,7 @@ router.get('/stats', async (req: Request, res: Response) => {
   try {
     const stats = await getStats();
     res.json(stats);
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch platform stats' });
   }
 });
@@ -35,8 +35,8 @@ router.get('/:studentId', async (req: Request, res: Response) => {
     const dashboard = await getStudentDashboard(studentId);
 
     res.json(dashboard);
-  } catch (error: any) {
-    if (error.message === 'Student not found') {
+  } catch (error: unknown) {
+    if (error instanceof Error && error.message === 'Student not found') {
       res.status(404).json({ error: 'Student Profile not found' });
     } else {
       res.status(500).json({ error: 'Internal server error while fetching dashboard' });
