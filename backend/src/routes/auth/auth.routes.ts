@@ -1,7 +1,8 @@
 import { Request, Response, Router } from 'express';
 import { authenticate } from '../../auth/auth.middleware.js';
 import { login, register } from '../../auth/auth.service.js';
-import { registerSchema } from '../../auth/validation.schemas.js';
+import { LoginRequest } from '../../auth/types.js';
+import { loginSchema, registerSchema } from '../../auth/validation.schemas.js';
 import { validateRequest } from '../../utils/validation.js';
 
 const router = Router();
@@ -26,10 +27,7 @@ router.post('/register', validateRequest(registerSchema), async (req: Request, r
 
     res.status(201).json(authResponse);
   } catch (error) {
-    if (
-      error instanceof Error &&
-      error.message === 'Student with this email already exists'
-    ) {
+    if (error instanceof Error && error.message === 'Student with this email already exists') {
       res.status(409).json({ error: error.message });
       return;
     }
@@ -42,16 +40,10 @@ router.post('/register', validateRequest(registerSchema), async (req: Request, r
  * @desc    Login student
  * @access  Public
  */
-router.post('/login', async (req: Request, res: Response) => {
+router.post('/login', validateRequest(loginSchema), async (req: Request, res: Response) => {
   const { email, password }: LoginRequest = req.body;
 
   try {
-    // Validation
-    if (!email || !password) {
-      res.status(400).json({ error: 'Email and password are required' });
-      return;
-    }
-
     // Login the student
     const authResponse = await login({ email, password });
 

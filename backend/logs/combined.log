@@ -14,3 +14,31 @@
 2026-03-27 14:14:37 info: 🔌 Port: 8080
 2026-03-27 14:14:37 info: 🌐 Stellar Network: testnet
 2026-03-27 14:14:37 info: Server is running on port 8080
+2026-03-27 14:15:16 info: Shutting down gracefully...
+2026-03-27 14:21:03 info: ✅ Environment variables validated successfully
+2026-03-27 14:21:03 info: ✅ Environment variables validated successfully
+2026-03-27 14:21:03 info: 🌍 Environment: test
+2026-03-27 14:21:03 info: 🔌 Port: 8080
+2026-03-27 14:21:03 info: 🌐 Stellar Network: testnet
+2026-03-27 14:21:03 info: GET /health
+2026-03-27 14:21:03 info: GET /health
+2026-03-27 14:21:03 info: GET /health
+2026-03-27 14:21:03 info: GET /health
+2026-03-27 14:21:03 info: GET /non-existent-route
+2026-03-27 14:21:03 info: ✅ Environment variables validated successfully
+2026-03-27 14:21:03 info: ✅ Environment variables validated successfully
+2026-03-27 14:21:03 info: ✅ Environment variables validated successfully
+2026-03-27 14:21:03 info: 🌍 Environment: test
+2026-03-27 14:21:03 info: 🔌 Port: 8080
+2026-03-27 14:21:03 info: 🌐 Stellar Network: testnet
+2026-03-27 14:21:03 info: POST /api/generator/generate
+2026-03-27 14:21:03 info: 🌍 Environment: test
+2026-03-27 14:21:03 info: 🔌 Port: 8080
+2026-03-27 14:21:03 info: 🌐 Stellar Network: testnet
+2026-03-27 14:21:03 info: 🌍 Environment: test
+2026-03-27 14:21:03 info: 🔌 Port: 8080
+2026-03-27 14:21:03 info: 🌐 Stellar Network: testnet
+2026-03-27 14:21:03 info: 🌍 Environment: test
+2026-03-27 14:21:03 info: 🔌 Port: 8080
+2026-03-27 14:21:03 info: 🌐 Stellar Network: testnet
+2026-03-27 14:21:08 info: POST /api/generator/generate

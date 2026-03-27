@@ -1,67 +1,137 @@
 import { Router, Request, Response } from 'express';
-import { getStudentProgress, updateStudentProgress } from './learning.service.js';
-import { curriculumByCourseId } from './curriculum.data.js';
+import { authenticate } from '../../auth/auth.middleware.js';
+import { validateBody, validateParams, validateQuery } from '../../utils/validation.js';
+import {
+  getCourseCurriculum,
+  getStudentProgress,
+  listCourses,
+  updateStudentProgress,
+} from './learning.service.js';
+import {
+  courseParamsSchema,
+  coursesQuerySchema,
+  progressUpdateSchema,
+} from './validation.schemas.js';
 
 const router = Router();
 
-// Use Course 1 as the default for the modules list
-const modules = curriculumByCourseId['course-1'] || [];
+/**
+ * @route   GET /api/learning/courses
+ * @desc    Get all learning courses
+ * @access  Public
+ */
+router.get(
+  '/courses',
+  validateQuery(coursesQuerySchema),
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const difficulty =
+        typeof req.query.difficulty === 'string' ? req.query.difficulty : undefined;
+      const courses = await listCourses(difficulty);
+      res.json({ courses });
+    } catch {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+);
 
 /**
+ * @route   GET /api/learning/courses/:courseId
+ * @desc    Get a specific course curriculum
+ * @access  Public
+ */
+router.get(
+  '/courses/:courseId',
+  validateParams(courseParamsSchema),
+  validateQuery(coursesQuerySchema),
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const courseId = req.params.courseId as string;
+      const difficulty =
+        typeof req.query.difficulty === 'string' ? req.query.difficulty : undefined;
+      const course = await getCourseCurriculum(courseId, difficulty);
+
+      if (!course) {
+        res.status(404).json({ error: 'Course not found' });
+        return;
+      }
+
+      res.json({ course });
+    } catch {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+);
+
+/**
+ * @route   GET /api/learning/courses/:courseId/progress
+ * @desc    Get user progress for a specific course
+ * @access  Private
+ */
+router.get(
+  '/courses/:courseId/progress',
+  authenticate,
+  validateParams(courseParamsSchema),
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const courseId = req.params.courseId as string;
+      const course = await getCourseCurriculum(courseId);
+
+      if (!course) {
+        res.status(404).json({ error: 'Course not found' });
+        return;
+      }
+
+      const progress = await getStudentProgress(req.user!.id, courseId);
+
+      res.json({ progress });
+    } catch {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+);
+
+/**
+ * @route   PATCH /api/learning/courses/:courseId/progress
+ * @desc    Update user progress for a specific course
+ * @access  Private
+ */
+router.patch(
+  '/courses/:courseId/progress',
+  authenticate,
+  validateParams(courseParamsSchema),
+  validateBody(progressUpdateSchema),
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const courseId = req.params.courseId as string;
+      const course = await getCourseCurriculum(courseId);
+
+      if (!course) {
+        res.status(404).json({ error: 'Course not found' });
+        return;
+      }
+
+      const progress = await updateStudentProgress(req.user!.id, courseId, req.body);
+      res.json({ progress });
+    } catch (error: any) {
+      if (error && error.message === 'LESSON_NOT_FOUND') {
+        res.status(404).json({ error: 'Lesson not found' });
+        return;
+      }
+
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
+);
+
+/**
+ * Legacy routes for backward compatibility with the premium frontend
  * @route   GET /api/learning/modules
- * @desc    Get all learning modules
- * @access  Public
  */
-router.get('/modules', (req: Request, res: Response) => {
+router.get('/modules', async (req: Request, res: Response) => {
   try {
-    const difficulty = req.query.difficulty as string | undefined;
-
-    let filteredModules = modules;
-
-    if (difficulty) {
-      filteredModules = modules.map((mod) => ({
-        ...mod,
-        lessons: mod.lessons.filter((lesson) => lesson.difficulty === difficulty),
-      }));
-    }
-
-    res.json({ modules: filteredModules });
-  } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-/**
- * @route   GET /api/learning/modules/:moduleId
- * @desc    Get a specific module by ID
- * @access  Public
- */
-router.get('/modules/:moduleId', (req: Request, res: Response) => {
-  try {
-    const moduleId = req.params.moduleId as string;
-    const module = modules.find((m) => m.id === moduleId);
-
-    if (!module) {
-      res.status(404).json({ error: 'Module not found' });
-      return;
-    }
-
-    res.json({ module });
-  } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-/**
- * @route   GET /api/learning/progress/:userId
- * @desc    Get user learning progress
- * @access  Public
- */
-router.get('/progress/:userId', async (req: Request, res: Response) => {
-  try {
-    const userId = req.params.userId as string;
-    const progress = await getStudentProgress(userId);
-    res.json({ progress });
+    const modules = await getCourseCurriculum('course-1');
+    res.json({ modules: modules?.modules || [] });
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
   }
@@ -69,29 +139,15 @@ router.get('/progress/:userId', async (req: Request, res: Response) => {
 
 /**
  * @route   POST /api/learning/progress/:userId/complete
- * @desc    Mark a lesson as complete
- * @access  Public
  */
 router.post('/progress/:userId/complete', async (req: Request, res: Response) => {
   try {
     const userId = req.params.userId as string;
     const { lessonId } = req.body;
-
-    if (!lessonId) {
-      res.status(400).json({ error: 'Lesson ID is required' });
-      return;
-    }
-
-    // Verify lesson exists in any module
-    const lessonExists = modules.some((mod) => mod.lessons.some((l) => l.id === lessonId));
-
-    if (!lessonExists) {
-      res.status(404).json({ error: 'Lesson not found' });
-      return;
-    }
-
-    const progress = await updateStudentProgress(userId, lessonId);
-
+    const progress = await updateStudentProgress(userId, 'course-1', {
+      lessonId,
+      status: 'completed',
+    });
     res.json({ progress, message: 'Lesson marked as complete' });
   } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
