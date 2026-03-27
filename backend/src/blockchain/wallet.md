@@ -2,7 +2,9 @@
 
 ## Overview
 
-This document outlines the logical steps for connecting to a Stellar wallet from the Web3 Student Lab frontend, bridged through the backend. The recommended wallet is **Freighter** — the most widely used Stellar browser extension wallet.
+This document outlines the logical steps for connecting to a Stellar wallet from the Web3 Student
+Lab frontend, bridged through the backend. The recommended wallet is **Freighter** — the most widely
+used Stellar browser extension wallet.
 
 ## Prerequisites
 
@@ -78,12 +80,12 @@ const signedXDR = await signTransaction(xdr, { network: 'TESTNET' });
 
 ## Error Handling
 
-| Scenario | Action |
-|---|---|
-| Freighter not installed | Show install prompt with link |
-| User rejects connection | Show friendly retry message |
-| Wrong network | Prompt user to switch network in Freighter |
-| Signing rejected | Abort transaction, notify user |
+| Scenario                | Action                                     |
+| ----------------------- | ------------------------------------------ |
+| Freighter not installed | Show install prompt with link              |
+| User rejects connection | Show friendly retry message                |
+| Wrong network           | Prompt user to switch network in Freighter |
+| Signing rejected        | Abort transaction, notify user             |
 
 ## Security Considerations
 

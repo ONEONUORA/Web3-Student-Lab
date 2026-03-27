@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { coursesAPI, Course } from '@/lib/api';
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { coursesAPI, Course } from "@/lib/api";
 
 export default function CoursesPage() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     async function loadCourses() {
@@ -15,7 +15,7 @@ export default function CoursesPage() {
         const data = await coursesAPI.getAll();
         setCourses(data);
       } catch (error) {
-        console.error('Failed to load courses:', error);
+        console.error("Failed to load courses:", error);
       } finally {
         setIsLoading(false);
       }
@@ -27,7 +27,7 @@ export default function CoursesPage() {
   const filteredCourses = courses.filter(
     (course) =>
       course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      course.description?.toLowerCase().includes(searchTerm.toLowerCase())
+      course.description?.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   if (isLoading) {
@@ -35,7 +35,9 @@ export default function CoursesPage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading courses...</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">
+            Loading courses...
+          </p>
         </div>
       </div>
     );
@@ -64,7 +66,9 @@ export default function CoursesPage() {
               href="/dashboard"
               className="px-6 py-3 text-sm font-bold text-white bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 hover:border-red-500/50 hover:text-red-500 transition-all uppercase tracking-wide flex items-center gap-2 group"
             >
-              <span className="transform group-hover:-translate-x-1 transition-transform">←</span>{' '}
+              <span className="transform group-hover:-translate-x-1 transition-transform">
+                ←
+              </span>{" "}
               Access Control
             </Link>
           </div>
@@ -125,7 +129,9 @@ export default function CoursesPage() {
                 No Modules Found
               </h3>
               <p className="mt-2 text-gray-500 font-light">
-                {searchTerm ? 'Adjust query parameters' : 'Environment uninitialized'}
+                {searchTerm
+                  ? "Adjust query parameters"
+                  : "Environment uninitialized"}
               </p>
             </div>
           ) : (
@@ -163,7 +169,7 @@ export default function CoursesPage() {
                     {course.title}
                   </h3>
                   <p className="text-gray-400 font-light text-sm mb-8 line-clamp-2 flex-grow">
-                    {course.description || 'System metadata missing'}
+                    {course.description || "System metadata missing"}
                   </p>
 
                   <div className="flex items-center justify-between pt-6 border-t border-white/10 mt-auto">
@@ -171,7 +177,7 @@ export default function CoursesPage() {
                       {course.instructor}
                     </span>
                     <span className="inline-flex items-center gap-2 text-red-500 font-bold uppercase text-xs tracking-widest group-hover:text-red-400 transition-colors">
-                      Enter Node{' '}
+                      Enter Node{" "}
                       <span className="transform group-hover:translate-x-1 transition-transform">
                         →
                       </span>

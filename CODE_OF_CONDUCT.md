@@ -24,12 +24,11 @@ Examples of unacceptable behavior by participants include:
 - Trolling, insulting/derogatory comments, and personal or political attacks
 - Public or private harassment
 - Publishing others' private information without explicit permission
-<<<<<<< HEAD
-=======
 
 ## Helping vs Hand-holding
 
-As a student-focused learning community, we strive to empower learners while avoiding dependency. Here's how we balance helping with fostering independence:
+As a student-focused learning community, we strive to empower learners while avoiding dependency.
+Here's how we balance helping with fostering independence:
 
 ### Examples of Helpful Support ✅
 
@@ -47,11 +46,13 @@ As a student-focused learning community, we strive to empower learners while avo
 - Creating dependencies on specific individuals
 - Undermining the learning process by shortcutting challenges
 
-Remember: The goal is learning, not just completion. We celebrate the journey of discovery and growth.
+Remember: The goal is learning, not just completion. We celebrate the journey of discovery and
+growth.
 
 ## Constructive Feedback
 
-In our educational environment, feedback is a gift that helps us all grow. We prioritize feedback that is specific, actionable, and kind.
+In our educational environment, feedback is a gift that helps us all grow. We prioritize feedback
+that is specific, actionable, and kind.
 
 ### Guidelines for Giving Feedback
 
@@ -74,7 +75,6 @@ In our educational environment, feedback is a gift that helps us all grow. We pr
 - Personal attacks or questioning someone's competence
 - Feedback without suggestions for improvement
 - Public criticism that could embarrass or discourage
->>>>>>> main
 
 ## Enforcement
 

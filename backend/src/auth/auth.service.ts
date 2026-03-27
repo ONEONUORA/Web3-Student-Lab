@@ -3,8 +3,7 @@ import jwt from 'jsonwebtoken';
 import prisma from '../db/index.js';
 import { RegisterRequest, LoginRequest, AuthResponse, User } from './types.js';
 
-const JWT_SECRET =
-  process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 const JWT_EXPIRES_IN = '7d';
 const SALT_ROUNDS = 10;
 
@@ -58,9 +57,7 @@ export const formatUserResponse = (student: {
 /**
  * Register a new student
  */
-export const register = async (
-  data: RegisterRequest
-): Promise<AuthResponse> => {
+export const register = async (data: RegisterRequest): Promise<AuthResponse> => {
   const { email, password, firstName, lastName } = data;
 
   // Check if student already exists
@@ -128,9 +125,7 @@ export const login = async (data: LoginRequest): Promise<AuthResponse> => {
 /**
  * Get a student by ID
  */
-export const getStudentById = async (
-  studentId: string
-): Promise<User | null> => {
+export const getStudentById = async (studentId: string): Promise<User | null> => {
   const student = await prisma.student.findUnique({
     where: { id: studentId },
   });

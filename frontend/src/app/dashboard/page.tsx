@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
+import { useEffect, useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 import {
   coursesAPI,
   certificatesAPI,
@@ -9,8 +9,8 @@ import {
   Course,
   Certificate,
   Enrollment,
-} from '@/lib/api';
-import Link from 'next/link';
+} from "@/lib/api";
+import Link from "next/link";
 
 export default function DashboardPage() {
   const { user, logout } = useAuth();
@@ -28,11 +28,14 @@ export default function DashboardPage() {
   useEffect(() => {
     async function loadDashboard() {
       try {
-        const [coursesData, certificatesData, enrollmentsData] = await Promise.all([
-          coursesAPI.getAll(),
-          user ? certificatesAPI.getByStudentId(user.id) : Promise.resolve([]),
-          user ? enrollmentsAPI.getByStudentId(user.id) : Promise.resolve([]),
-        ]);
+        const [coursesData, certificatesData, enrollmentsData] =
+          await Promise.all([
+            coursesAPI.getAll(),
+            user
+              ? certificatesAPI.getByStudentId(user.id)
+              : Promise.resolve([]),
+            user ? enrollmentsAPI.getByStudentId(user.id) : Promise.resolve([]),
+          ]);
 
         setCourses(coursesData);
         setCertificates(certificatesData);
@@ -45,7 +48,7 @@ export default function DashboardPage() {
           certificates: certificatesData.length,
         });
       } catch (error) {
-        console.error('Failed to load dashboard:', error);
+        console.error("Failed to load dashboard:", error);
       } finally {
         setIsLoading(false);
       }
@@ -59,7 +62,9 @@ export default function DashboardPage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading dashboard...</p>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">
+            Loading dashboard...
+          </p>
         </div>
       </div>
     );
@@ -89,7 +94,7 @@ export default function DashboardPage() {
                   Active Operator
                 </span>
                 <span className="text-sm font-mono text-gray-300">
-                  {user?.name || 'Unknown Entity'}
+                  {user?.name || "Unknown Entity"}
                 </span>
               </div>
               <button
@@ -111,9 +116,11 @@ export default function DashboardPage() {
             Terminal <span className="text-gray-500">Access Granted</span>
           </h2>
           <p className="text-gray-400 font-light text-lg tracking-wide">
-            Operator{' '}
-            <span className="text-white font-mono">{user?.name?.split(' ')[0] || 'Student'}</span> —
-            Metrics and module connections active.
+            Operator{" "}
+            <span className="text-white font-mono">
+              {user?.name?.split(" ")[0] || "Student"}
+            </span>{" "}
+            — Metrics and module connections active.
           </p>
         </div>
 
@@ -137,7 +144,9 @@ export default function DashboardPage() {
                   />
                 </svg>
               </div>
-              <p className="text-3xl font-black text-white font-mono">{stats.totalCourses}</p>
+              <p className="text-3xl font-black text-white font-mono">
+                {stats.totalCourses}
+              </p>
             </div>
             <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mt-2">
               Available Nodes
@@ -162,7 +171,9 @@ export default function DashboardPage() {
                   />
                 </svg>
               </div>
-              <p className="text-3xl font-black text-white font-mono">{stats.enrolledCourses}</p>
+              <p className="text-3xl font-black text-white font-mono">
+                {stats.enrolledCourses}
+              </p>
             </div>
             <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mt-2">
               Active Uplinks
@@ -187,7 +198,9 @@ export default function DashboardPage() {
                   />
                 </svg>
               </div>
-              <p className="text-3xl font-black text-white font-mono">{stats.completedCourses}</p>
+              <p className="text-3xl font-black text-white font-mono">
+                {stats.completedCourses}
+              </p>
             </div>
             <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mt-2">
               Executed Modules
@@ -212,7 +225,9 @@ export default function DashboardPage() {
                   />
                 </svg>
               </div>
-              <p className="text-3xl font-black text-white font-mono">{stats.certificates}</p>
+              <p className="text-3xl font-black text-white font-mono">
+                {stats.certificates}
+              </p>
             </div>
             <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mt-2">
               Cryptographic Tokens
@@ -224,14 +239,17 @@ export default function DashboardPage() {
         <div className="mb-16">
           <div className="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
             <h3 className="text-xl font-black text-white uppercase tracking-widest flex items-center gap-3">
-              <span className="w-4 h-4 bg-red-600 rounded-sm inline-block"></span> Directory Nodes
+              <span className="w-4 h-4 bg-red-600 rounded-sm inline-block"></span>{" "}
+              Directory Nodes
             </h3>
             <Link
               href="/courses"
               className="text-gray-400 hover:text-white uppercase text-xs font-bold tracking-widest transition-colors flex items-center gap-1 group"
             >
-              Scan All{' '}
-              <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+              Scan All{" "}
+              <span className="transform group-hover:translate-x-1 transition-transform">
+                →
+              </span>
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -246,7 +264,7 @@ export default function DashboardPage() {
                   {course.title}
                 </h4>
                 <p className="text-gray-400 font-light text-sm mb-6 line-clamp-2">
-                  {course.description || 'System metadata missing'}
+                  {course.description || "System metadata missing"}
                 </p>
                 <div className="flex justify-between items-center pt-6 border-t border-white/5">
                   <span className="text-xs font-mono text-gray-500 px-2 py-1 bg-black border border-white/10 rounded">
@@ -266,15 +284,17 @@ export default function DashboardPage() {
           <div>
             <div className="flex justify-between items-center mb-8 border-b border-white/10 pb-4">
               <h3 className="text-xl font-black text-white uppercase tracking-widest flex items-center gap-3">
-                <span className="w-4 h-4 bg-red-600 rounded-sm inline-block"></span> Issued
-                Credentials
+                <span className="w-4 h-4 bg-red-600 rounded-sm inline-block"></span>{" "}
+                Issued Credentials
               </h3>
               <Link
                 href="/certificates"
                 className="text-gray-400 hover:text-white uppercase text-xs font-bold tracking-widest transition-colors flex items-center gap-1 group"
               >
-                Vault{' '}
-                <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                Vault{" "}
+                <span className="transform group-hover:translate-x-1 transition-transform">
+                  →
+                </span>
               </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -306,9 +326,11 @@ export default function DashboardPage() {
                     </span>
                   </div>
                   <h4 className="text-xl font-bold text-white mb-2 uppercase tracking-wide group-hover:text-red-100">
-                    {cert.course?.title || 'Soroban Protocol'}
+                    {cert.course?.title || "Soroban Protocol"}
                   </h4>
-                  <p className="text-sm font-light text-red-500/80">On-Chain Certification</p>
+                  <p className="text-sm font-light text-red-500/80">
+                    On-Chain Certification
+                  </p>
                 </Link>
               ))}
             </div>

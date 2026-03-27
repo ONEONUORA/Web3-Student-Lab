@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -13,12 +13,12 @@ export default function Navbar() {
   const isActive = (path: string) => pathname === path;
 
   const navLinks = [
-    { name: 'MODULES', path: '/courses' },
-    { name: 'ROADMAP', path: '/roadmap' },
-    { name: 'PLAYGROUND', path: '/playground' },
-    { name: 'SIMULATOR', path: '/simulator' },
-    { name: 'IDEAS', path: '/ideas' },
-    { name: 'VERIFY', path: '/verify' },
+    { name: "MODULES", path: "/courses" },
+    { name: "ROADMAP", path: "/roadmap" },
+    { name: "PLAYGROUND", path: "/playground" },
+    { name: "SIMULATOR", path: "/simulator" },
+    { name: "IDEAS", path: "/ideas" },
+    { name: "VERIFY", path: "/verify" },
   ];
 
   return (
@@ -56,7 +56,9 @@ export default function Navbar() {
                 key={link.path}
                 href={link.path}
                 className={`text-[10px] font-black tracking-[0.2em] transition-colors uppercase ${
-                  isActive(link.path) ? 'text-red-500' : 'text-gray-400 hover:text-white'
+                  isActive(link.path)
+                    ? "text-red-500"
+                    : "text-gray-400 hover:text-white"
                 }`}
               >
                 {link.name}
@@ -70,9 +72,9 @@ export default function Navbar() {
                 <Link
                   href="/dashboard"
                   className={`text-[10px] font-black tracking-[0.2em] px-4 py-2 border rounded transition-all uppercase ${
-                    isActive('/dashboard')
-                      ? 'bg-red-600 border-red-500 text-white shadow-[0_0_15px_rgba(220,38,38,0.4)]'
-                      : 'border-white/10 text-gray-400 hover:text-white hover:border-red-500/50'
+                    isActive("/dashboard")
+                      ? "bg-red-600 border-red-500 text-white shadow-[0_0_15px_rgba(220,38,38,0.4)]"
+                      : "border-white/10 text-gray-400 hover:text-white hover:border-red-500/50"
                   }`}
                 >
                   DASHBOARD
@@ -80,9 +82,9 @@ export default function Navbar() {
                 <Link
                   href="/certificates"
                   className={`text-[10px] font-black tracking-[0.2em] px-4 py-2 border rounded transition-all uppercase ${
-                    isActive('/certificates')
-                      ? 'bg-red-600 border-red-500 text-white shadow-[0_0_15px_rgba(220,38,38,0.4)]'
-                      : 'border-white/10 text-gray-400 hover:text-white hover:border-red-500/50'
+                    isActive("/certificates")
+                      ? "bg-red-600 border-red-500 text-white shadow-[0_0_15px_rgba(220,38,38,0.4)]"
+                      : "border-white/10 text-gray-400 hover:text-white hover:border-red-500/50"
                   }`}
                 >
                   VAULT
@@ -131,7 +133,12 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-gray-300 hover:text-white focus:outline-none"
             >
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-8 h-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 {isMobileMenuOpen ? (
                   <path
                     strokeLinecap="round"
@@ -163,8 +170,8 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
               className={`block px-3 py-3 text-sm font-black tracking-widest uppercase rounded-md transition-colors ${
                 isActive(link.path)
-                  ? 'bg-red-500/10 text-red-500'
-                  : 'text-gray-400 hover:text-white hover:bg-white/5'
+                  ? "bg-red-500/10 text-red-500"
+                  : "text-gray-400 hover:text-white hover:bg-white/5"
               }`}
             >
               {link.name}

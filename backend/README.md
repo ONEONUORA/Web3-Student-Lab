@@ -286,7 +286,6 @@ this project.
 
 ## 📜 License
 
-<<<<<<< HEAD
 MIT License - see the main [LICENSE](../LICENSE) file for details. │ ├── db/ # Database client and
 Prisma setup │ ├── routes/ # Modular API routers │ │ ├── index.ts # Main router that mounts all
 feature routers │ │ ├── students.ts │ │ ├── courses.ts │ │ ├── certificates.ts │ │ └──
@@ -295,26 +294,6 @@ enrollments.ts │ ├── middleware/ # Express middleware │ ├── gene
 schema definition │ └── migrations/ # Database migrations ├── prisma.config.ts # Prisma
 configuration ├── .env # Environment variables (not committed) ├── .env.example # Environment
 variables template └── package.json
-=======
-MIT License - see the main [LICENSE](../LICENSE) file for details.
-│ ├── db/ # Database client and Prisma setup
-│ ├── routes/ # Modular API routers
-│ │ ├── index.ts # Main router that mounts all feature routers
-│ │ ├── students.ts
-│ │ ├── courses.ts
-│ │ ├── certificates.ts
-│ │ └── enrollments.ts
-│ ├── middleware/ # Express middleware
-│ ├── generated/ # Generated Prisma client (auto-generated)
-│ └── index.ts # Application entry point
-├── prisma/
-│ ├── schema.prisma # Database schema definition
-│ └── migrations/ # Database migrations
-├── prisma.config.ts # Prisma configuration
-├── .env # Environment variables (not committed)
-├── .env.example # Environment variables template
-└── package.json
->>>>>>> main
 
 ````
 

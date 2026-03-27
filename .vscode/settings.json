@@ -129,11 +129,7 @@
   "breadcrumbs.enabled": true,
   "workbench.editor.enablePreview": false,
   "workbench.editor.showTabs": "multiple",
-<<<<<<< HEAD
   "workbench.colorTheme": "Default Dark+",
-=======
-  "workbench.colorTheme": "Dark+",
->>>>>>> main
   "workbench.iconTheme": "vs-seti",
   "terminal.integrated.shell.osx": "/bin/zsh",
   "terminal.integrated.fontSize": 14,

@@ -57,7 +57,8 @@ timeline
 
 ### Phase 1: Discovery 🔍
 
-**Objective:** Define the core platform architecture, validate learning mechanisms, and design the initial curriculum.
+**Objective:** Define the core platform architecture, validate learning mechanisms, and design the
+initial curriculum.
 
 - **Milestones:**
   - [x] Initial repository setup and architecture planning
@@ -66,7 +67,8 @@ timeline
 
 ### Phase 2: Development 🛠️
 
-**Objective:** Build out the core modules, integrate blockchain functionalities, and develop the interactive playground.
+**Objective:** Build out the core modules, integrate blockchain functionalities, and develop the
+interactive playground.
 
 - **Milestones:**
   - [ ] Implement Next.js + Tailwind frontend
@@ -75,7 +77,8 @@ timeline
 
 ### Phase 3: Deployment 🚀
 
-**Objective:** Launch the MVP, onboard the first cohort of students, and gather metrics for future iterations.
+**Objective:** Launch the MVP, onboard the first cohort of students, and gather metrics for future
+iterations.
 
 - **Milestones:**
   - [ ] Deploy backend and database to cloud infrastructure
@@ -128,14 +131,11 @@ Compose.
 
 ## 🤝 Rules for Contributors
 
-<<<<<<< HEAD
 We love our contributors! This project is being built for students, by students and open-source
 enthusiasts.
-=======
-We love our contributors! This project is being built for students, by students and open-source enthusiasts.
 
-> **Important:** Please add an ETA (no more than 2 days) when expressing interest in an issue to help us keep development moving quickly.
->>>>>>> main
+> **Important:** Please add an ETA (no more than 2 days) when expressing interest in an issue to
+> help us keep development moving quickly.
 
 To start contributing:
 

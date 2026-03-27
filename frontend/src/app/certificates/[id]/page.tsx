@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { certificatesAPI, Certificate } from '@/lib/api';
-import { useAuth } from '@/contexts/AuthContext';
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
+import { certificatesAPI, Certificate } from "@/lib/api";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function CertificateNFTPage() {
   const params = useParams();
@@ -24,8 +24,8 @@ export default function CertificateNFTPage() {
         const data = await certificatesAPI.getById(params.id as string);
         setCertificate(data);
       } catch (error) {
-        console.error('Failed to load certificate:', error);
-        router.push('/certificates');
+        console.error("Failed to load certificate:", error);
+        router.push("/certificates");
       } finally {
         setIsLoading(false);
       }
@@ -41,8 +41,8 @@ export default function CertificateNFTPage() {
       const result = await certificatesAPI.verifyOnChain(certificate.id);
       setVerificationResult(result);
     } catch (error) {
-      console.error('Failed to verify:', error);
-      alert('Network error during cryptographic verification.');
+      console.error("Failed to verify:", error);
+      alert("Network error during cryptographic verification.");
     } finally {
       setIsVerifying(false);
     }
@@ -135,7 +135,7 @@ export default function CertificateNFTPage() {
                     Holder Identity
                   </p>
                   <p className="text-xs font-bold text-white uppercase tracking-wider truncate max-w-[150px]">
-                    {certificate.student?.name || 'Unknown Operator'}
+                    {certificate.student?.name || "Unknown Operator"}
                   </p>
                 </div>
                 <div className="text-right">
@@ -158,18 +158,21 @@ export default function CertificateNFTPage() {
               href="/certificates"
               className="text-gray-500 hover:text-red-500 uppercase text-xs font-bold tracking-widest mb-6 inline-flex items-center gap-2 group transition-colors"
             >
-              <span className="transform group-hover:-translate-x-1 transition-transform">←</span>{' '}
+              <span className="transform group-hover:-translate-x-1 transition-transform">
+                ←
+              </span>{" "}
               Back to Vault
             </Link>
             <h1 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tight mb-2">
-              {certificate.course?.title || 'Unknown Protocol'}
+              {certificate.course?.title || "Unknown Protocol"}
             </h1>
             <p className="text-red-500 font-mono tracking-widest uppercase text-sm mb-6">
               Non-Fungible Certification
             </p>
             <p className="text-gray-400 font-light text-lg">
-              This cryptographic token proves execution and mastery of the linked learning module.
-              It exists immutably on the Stellar blockchain network.
+              This cryptographic token proves execution and mastery of the
+              linked learning module. It exists immutably on the Stellar
+              blockchain network.
             </p>
           </div>
 
@@ -186,7 +189,7 @@ export default function CertificateNFTPage() {
               <div className="flex justify-between items-center bg-black border border-white/5 p-3 rounded">
                 <span className="text-gray-500">Transaction Hash</span>
                 <span className="text-red-400 break-all ml-4 text-right">
-                  {certificate.certificateHash || 'Pending confirmation'}
+                  {certificate.certificateHash || "Pending confirmation"}
                 </span>
               </div>
               <div className="flex justify-between items-center bg-black border border-white/5 p-3 rounded">
@@ -210,11 +213,11 @@ export default function CertificateNFTPage() {
               disabled={isVerifying}
               className={`flex-1 py-4 font-black uppercase tracking-widest rounded-xl transition-all ${
                 isVerifying
-                  ? 'bg-zinc-800 text-gray-500 cursor-wait'
-                  : 'bg-white text-black hover:bg-gray-200 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]'
+                  ? "bg-zinc-800 text-gray-500 cursor-wait"
+                  : "bg-white text-black hover:bg-gray-200 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]"
               }`}
             >
-              {isVerifying ? 'Polling Network...' : 'Verify On-Chain'}
+              {isVerifying ? "Polling Network..." : "Verify On-Chain"}
             </button>
             <button className="px-6 py-4 bg-zinc-900 border border-white/10 hover:border-red-500/50 text-white rounded-xl transition-colors group">
               <svg

@@ -18,8 +18,7 @@ const HORIZON_DEFAULTS: Record<string, string> = {
  * The active Stellar network. Defaults to "testnet" for local development.
  * Override with the STELLAR_NETWORK environment variable.
  */
-export const STELLAR_NETWORK: string =
-  process.env.STELLAR_NETWORK ?? 'testnet';
+export const STELLAR_NETWORK: string = process.env.STELLAR_NETWORK ?? 'testnet';
 
 /**
  * Soroban RPC URL for the active network.

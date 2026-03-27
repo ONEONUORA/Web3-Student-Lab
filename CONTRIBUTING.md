@@ -14,6 +14,9 @@ If not, go ahead and make one!
 If this is something you think you can fix, then fork Web3 Student Lab and create a branch with a
 descriptive name.
 
+Before committing, read [Git Commit Guidelines](CONTRIBUTING_GIT.md) for required commit prefixes
+and commit message format.
+
 ## 3. Get the code working locally
 
 ### Development Tooling
@@ -33,12 +36,8 @@ To contribute to the smart contracts, you'll need the following Rust tools:
 
 ## 4. Implement your fix or feature
 
-<<<<<<< HEAD
 At this point, you're ready to make your changes! Feel free to ask for help; everyone is a beginner
 at first.
-=======
-At this point, you're ready to make your changes! Feel free to ask for help; everyone is a beginner at first.
->>>>>>> main
 
 > [!IMPORTANT] Please review our [Security Best Practices](docs/SECURITY.md) and
 > [CI/CD Pipeline Guide](docs/CICD_GUIDE.md) before making any changes related to secrets, sensitive

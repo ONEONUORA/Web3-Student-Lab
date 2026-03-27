@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { certificatesAPI, Certificate } from '@/lib/api';
-import { useAuth } from '@/contexts/AuthContext';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { certificatesAPI, Certificate } from "@/lib/api";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
 
 export default function CertificatesVaultPage() {
   const { user } = useAuth();
@@ -14,7 +14,7 @@ export default function CertificatesVaultPage() {
 
   useEffect(() => {
     if (!user) {
-      router.push('/auth/login');
+      router.push("/auth/login");
       return;
     }
 
@@ -23,7 +23,7 @@ export default function CertificatesVaultPage() {
         const data = await certificatesAPI.getByStudentId(user!.id);
         setCertificates(data);
       } catch (error) {
-        console.error('Failed to load vault:', error);
+        console.error("Failed to load vault:", error);
       } finally {
         setIsLoading(false);
       }
@@ -56,7 +56,8 @@ export default function CertificatesVaultPage() {
             Cryptographic <span className="text-red-500">Vault</span>
           </h1>
           <p className="text-gray-400 font-light text-lg tracking-wide uppercase font-mono text-sm">
-            Stored assets for Operator: <span className="text-white">{user?.name}</span>
+            Stored assets for Operator:{" "}
+            <span className="text-white">{user?.name}</span>
           </p>
         </div>
 
@@ -81,8 +82,8 @@ export default function CertificatesVaultPage() {
               Vault Empty
             </h2>
             <p className="text-gray-500 mb-8 max-w-md mx-auto">
-              No cryptographic tokens found on-chain for this operator. Connect to a learning node
-              to begin extracting credentials.
+              No cryptographic tokens found on-chain for this operator. Connect
+              to a learning node to begin extracting credentials.
             </p>
             <Link
               href="/courses"
@@ -127,11 +128,13 @@ export default function CertificatesVaultPage() {
                 </div>
 
                 <h2 className="text-2xl font-black text-white mb-2 uppercase tracking-tight leading-tight group-hover:text-red-50 transition-colors">
-                  {cert.course?.title || 'Unknown Protocol'}
+                  {cert.course?.title || "Unknown Protocol"}
                 </h2>
                 <div className="text-sm font-mono text-red-500/80 mb-6 truncate">
-                  TX:{' '}
-                  {cert.certificateHash ? `${cert.certificateHash.substring(0, 16)}...` : 'PENDING'}
+                  TX:{" "}
+                  {cert.certificateHash
+                    ? `${cert.certificateHash.substring(0, 16)}...`
+                    : "PENDING"}
                 </div>
 
                 <div className="pt-6 border-t border-white/10 flex justify-between items-center">
@@ -139,7 +142,7 @@ export default function CertificatesVaultPage() {
                     Web3 Lab Identity
                   </span>
                   <span className="text-xs font-bold text-red-500 uppercase tracking-widest group-hover:text-red-400 flex items-center gap-1">
-                    Inspect Asset{' '}
+                    Inspect Asset{" "}
                     <span className="transform group-hover:translate-x-1 transition-transform">
                       →
                     </span>

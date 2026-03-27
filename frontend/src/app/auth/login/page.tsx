@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { useAuth } from '@/contexts/AuthContext';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function LoginPage() {
   const router = useRouter();
   const { login, error, clearError } = useAuth();
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
@@ -31,10 +31,12 @@ export default function LoginPage() {
 
     try {
       await login(formData.email, formData.password);
-      router.push('/dashboard');
+      router.push("/dashboard");
     } catch (err: unknown) {
       const message =
-        err instanceof Error ? err.message : 'Login failed. Please check your credentials.';
+        err instanceof Error
+          ? err.message
+          : "Login failed. Please check your credentials.";
       setLocalError(message);
     } finally {
       setIsSubmitting(false);
@@ -66,13 +68,17 @@ export default function LoginPage() {
           <h1 className="text-3xl font-black text-white mb-2 tracking-wide uppercase">
             Initialize <span className="text-red-600">Session</span>
           </h1>
-          <p className="text-gray-400 font-medium">Access your secure Web3 learning node</p>
+          <p className="text-gray-400 font-medium">
+            Access your secure Web3 learning node
+          </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {(error || localError) && (
             <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-4">
-              <p className="text-red-500 text-sm font-bold text-center">{error || localError}</p>
+              <p className="text-red-500 text-sm font-bold text-center">
+                {error || localError}
+              </p>
             </div>
           )}
 
@@ -127,17 +133,17 @@ export default function LoginPage() {
             disabled={isSubmitting}
             className={`w-full py-4 rounded-lg font-black tracking-widest uppercase transition-all shadow-[0_0_15px_rgba(220,38,38,0.3)] ${
               isSubmitting
-                ? 'bg-red-900 text-gray-400 cursor-not-allowed'
-                : 'bg-red-600 hover:bg-red-700 text-white hover:shadow-[0_0_25px_rgba(220,38,38,0.6)] transform hover:-translate-y-0.5'
+                ? "bg-red-900 text-gray-400 cursor-not-allowed"
+                : "bg-red-600 hover:bg-red-700 text-white hover:shadow-[0_0_25px_rgba(220,38,38,0.6)] transform hover:-translate-y-0.5"
             }`}
           >
-            {isSubmitting ? 'Authenticating...' : 'Connect node'}
+            {isSubmitting ? "Authenticating..." : "Connect node"}
           </button>
         </form>
 
         <div className="mt-8 text-center border-t border-white/10 pt-6">
           <p className="text-gray-400">
-            Node uninitialized?{' '}
+            Node uninitialized?{" "}
             <Link
               href="/auth/register"
               className="text-red-500 hover:text-red-400 font-bold tracking-wide uppercase"

@@ -23,9 +23,7 @@ router.get('/balance/:publicKey', async (req: Request, res: Response) => {
     const server = new Horizon.Server(HORIZON_URL);
     const account = await server.loadAccount(publicKey);
 
-    const nativeBalance = account.balances.find(
-      (b) => b.asset_type === 'native'
-    );
+    const nativeBalance = account.balances.find((b) => b.asset_type === 'native');
 
     res.json({
       status: 'success',

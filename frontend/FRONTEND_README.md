@@ -135,7 +135,7 @@ The frontend connects to the backend through a typed API client:
 
 ```typescript
 // Example usage
-import { coursesAPI, authAPI } from '@/lib/api';
+import { coursesAPI, authAPI } from "@/lib/api";
 
 // Get all courses
 const courses = await coursesAPI.getAll();
@@ -152,10 +152,10 @@ await enrollmentsAPI.enroll(studentId, courseId);
 The application integrates with Soroban smart contracts for certificate verification:
 
 ```typescript
-import { verifyCertificateOnChain } from '@/lib/soroban';
+import { verifyCertificateOnChain } from "@/lib/soroban";
 
 // Verify a certificate
-const cert = await verifyCertificateOnChain('CERTIFICATE_SYMBOL');
+const cert = await verifyCertificateOnChain("CERTIFICATE_SYMBOL");
 ```
 
 **Note**: Full blockchain integration requires:

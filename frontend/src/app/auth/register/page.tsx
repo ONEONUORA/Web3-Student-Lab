@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { useAuth } from '@/contexts/AuthContext';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function RegisterPage() {
   const router = useRouter();
   const { register, error, clearError } = useAuth();
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    firstName: '',
-    lastName: '',
+    email: "",
+    password: "",
+    confirmPassword: "",
+    firstName: "",
+    lastName: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
@@ -34,22 +34,30 @@ export default function RegisterPage() {
 
     // Validation
     if (formData.password !== formData.confirmPassword) {
-      setLocalError('Passwords do not match');
+      setLocalError("Passwords do not match");
       setIsSubmitting(false);
       return;
     }
 
     if (formData.password.length < 6) {
-      setLocalError('Password must be at least 6 characters');
+      setLocalError("Password must be at least 6 characters");
       setIsSubmitting(false);
       return;
     }
 
     try {
-      await register(formData.email, formData.password, formData.firstName, formData.lastName);
-      router.push('/dashboard');
+      await register(
+        formData.email,
+        formData.password,
+        formData.firstName,
+        formData.lastName,
+      );
+      router.push("/dashboard");
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Registration failed. Please try again.';
+      const message =
+        err instanceof Error
+          ? err.message
+          : "Registration failed. Please try again.";
       setLocalError(message);
     } finally {
       setIsSubmitting(false);
@@ -81,13 +89,17 @@ export default function RegisterPage() {
           <h1 className="text-3xl font-black text-white mb-2 tracking-wide uppercase">
             Initialize <span className="text-red-600">Node</span>
           </h1>
-          <p className="text-gray-400 font-medium">Join the decentralized education protocol</p>
+          <p className="text-gray-400 font-medium">
+            Join the decentralized education protocol
+          </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {(error || localError) && (
             <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-4">
-              <p className="text-red-500 text-sm font-bold text-center">{error || localError}</p>
+              <p className="text-red-500 text-sm font-bold text-center">
+                {error || localError}
+              </p>
             </div>
           )}
 
@@ -192,17 +204,17 @@ export default function RegisterPage() {
             disabled={isSubmitting}
             className={`w-full py-4 mt-2 rounded-lg font-black tracking-widest uppercase transition-all shadow-[0_0_15px_rgba(220,38,38,0.3)] ${
               isSubmitting
-                ? 'bg-red-900 text-gray-400 cursor-not-allowed'
-                : 'bg-red-600 hover:bg-red-700 text-white hover:shadow-[0_0_25px_rgba(220,38,38,0.6)] transform hover:-translate-y-0.5'
+                ? "bg-red-900 text-gray-400 cursor-not-allowed"
+                : "bg-red-600 hover:bg-red-700 text-white hover:shadow-[0_0_25px_rgba(220,38,38,0.6)] transform hover:-translate-y-0.5"
             }`}
           >
-            {isSubmitting ? 'Initializing...' : 'Construct Block'}
+            {isSubmitting ? "Initializing..." : "Construct Block"}
           </button>
         </form>
 
         <div className="mt-8 text-center border-t border-white/10 pt-6">
           <p className="text-gray-400">
-            Node already initialized?{' '}
+            Node already initialized?{" "}
             <Link
               href="/auth/login"
               className="text-red-500 hover:text-red-400 font-bold tracking-wide uppercase"

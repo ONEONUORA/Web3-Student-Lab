@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { verifyCertificateOnChain, CertificateData } from '@/lib/soroban';
+import { useState } from "react";
+import { verifyCertificateOnChain, CertificateData } from "@/lib/soroban";
 
 export default function VerifyCertificatePage() {
-  const [certificateId, setCertificateId] = useState('');
+  const [certificateId, setCertificateId] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
   const [result, setResult] = useState<CertificateData | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -26,10 +26,12 @@ export default function VerifyCertificatePage() {
         setResult(data);
         setVerified(true);
       } else {
-        setError('Certificate not found on blockchain');
+        setError("Certificate not found on blockchain");
       }
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Failed to verify certificate');
+      setError(
+        err instanceof Error ? err.message : "Failed to verify certificate",
+      );
     } finally {
       setIsVerifying(false);
     }
@@ -98,13 +100,16 @@ export default function VerifyCertificatePage() {
               disabled={isVerifying || !certificateId.trim()}
               className={`w-full py-5 px-6 rounded-xl font-black tracking-widest uppercase transition-all shadow-[0_0_15px_rgba(220,38,38,0.3)] ${
                 isVerifying || !certificateId.trim()
-                  ? 'bg-red-900/50 text-gray-500 cursor-not-allowed border border-red-900/50'
-                  : 'bg-red-600 hover:bg-red-700 text-white hover:shadow-[0_0_30px_rgba(220,38,38,0.6)] transform hover:-translate-y-0.5'
+                  ? "bg-red-900/50 text-gray-500 cursor-not-allowed border border-red-900/50"
+                  : "bg-red-600 hover:bg-red-700 text-white hover:shadow-[0_0_30px_rgba(220,38,38,0.6)] transform hover:-translate-y-0.5"
               }`}
             >
               {isVerifying ? (
                 <span className="flex items-center justify-center gap-3">
-                  <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                  <svg
+                    className="animate-spin h-5 w-5 text-white"
+                    viewBox="0 0 24 24"
+                  >
                     <circle
                       className="opacity-25"
                       cx="12"
@@ -123,7 +128,7 @@ export default function VerifyCertificatePage() {
                   Querying Blockchain...
                 </span>
               ) : (
-                'Run Verification'
+                "Run Verification"
               )}
             </button>
           </form>
@@ -195,34 +200,43 @@ export default function VerifyCertificatePage() {
                   <p className="text-xs font-bold text-gray-500 mb-2 uppercase tracking-widest">
                     Symbol
                   </p>
-                  <p className="text-2xl font-black text-white">{result.symbol}</p>
+                  <p className="text-2xl font-black text-white">
+                    {result.symbol}
+                  </p>
                 </div>
                 <div>
                   <p className="text-xs font-bold text-gray-500 mb-2 uppercase tracking-widest">
                     Identity
                   </p>
-                  <p className="text-xl font-bold text-gray-300">{result.student}</p>
+                  <p className="text-xl font-bold text-gray-300">
+                    {result.student}
+                  </p>
                 </div>
               </div>
               <div className="pt-6 border-t border-white/5">
                 <p className="text-xs font-bold text-gray-500 mb-2 uppercase tracking-widest">
                   Protocol / Curriculum
                 </p>
-                <p className="text-lg font-bold text-white">{result.course_name}</p>
+                <p className="text-lg font-bold text-white">
+                  {result.course_name}
+                </p>
               </div>
               <div className="pt-6 border-t border-white/5">
                 <p className="text-xs font-bold text-gray-500 mb-2 uppercase tracking-widest">
                   Timestamp
                 </p>
                 <p className="text-lg font-mono text-gray-300">
-                  {new Date(Number(result.issue_date) * 1000).toLocaleString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    timeZoneName: 'short',
-                  })}
+                  {new Date(Number(result.issue_date) * 1000).toLocaleString(
+                    "en-US",
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      timeZoneName: "short",
+                    },
+                  )}
                 </p>
               </div>
             </div>
@@ -267,9 +281,10 @@ export default function VerifyCertificatePage() {
 
           <div className="space-y-6 text-gray-400 font-light">
             <p className="leading-relaxed">
-              Credentials mapped to the Web3 Student Lab are permanently minted on the Stellar
-              blockchain via highly optimized Soroban smart contracts. This cryptographic
-              attestation guarantees unforgeable proof-of-knowledge.
+              Credentials mapped to the Web3 Student Lab are permanently minted
+              on the Stellar blockchain via highly optimized Soroban smart
+              contracts. This cryptographic attestation guarantees unforgeable
+              proof-of-knowledge.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 border-t border-white/5 pt-8">
               <div className="flex items-start gap-4">
@@ -292,7 +307,9 @@ export default function VerifyCertificatePage() {
                   <h4 className="font-bold text-white mb-1 uppercase tracking-wider text-sm">
                     Immutable
                   </h4>
-                  <p className="text-xs text-gray-500">Tamper-proof ledger encoding.</p>
+                  <p className="text-xs text-gray-500">
+                    Tamper-proof ledger encoding.
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -315,7 +332,9 @@ export default function VerifyCertificatePage() {
                   <h4 className="font-bold text-white mb-1 uppercase tracking-wider text-sm">
                     Real-Time
                   </h4>
-                  <p className="text-xs text-gray-500">Sub-second global verification.</p>
+                  <p className="text-xs text-gray-500">
+                    Sub-second global verification.
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -338,7 +357,9 @@ export default function VerifyCertificatePage() {
                   <h4 className="font-bold text-white mb-1 uppercase tracking-wider text-sm">
                     Decentralized
                   </h4>
-                  <p className="text-xs text-gray-500">Powered by Soroban Network.</p>
+                  <p className="text-xs text-gray-500">
+                    Powered by Soroban Network.
+                  </p>
                 </div>
               </div>
             </div>

@@ -16,9 +16,7 @@ const MAX_RATING = 5;
  */
 const validateRating = (rating: number): void => {
   if (!Number.isInteger(rating) || rating < MIN_RATING || rating > MAX_RATING) {
-    throw new Error(
-      `Rating must be an integer between ${MIN_RATING} and ${MAX_RATING}`
-    );
+    throw new Error(`Rating must be an integer between ${MIN_RATING} and ${MAX_RATING}`);
   }
 };
 
@@ -87,9 +85,7 @@ export const createFeedback = async (
   });
 
   if (!enrollment) {
-    throw new Error(
-      'Student must be enrolled in the course to submit feedback'
-    );
+    throw new Error('Student must be enrolled in the course to submit feedback');
   }
 
   // Create or update feedback (upsert)
@@ -308,10 +304,7 @@ export const getCourseRatingSummary = async (courseId: string): Promise<CourseRa
     };
   }
 
-  const sum = feedback.reduce(
-    (acc: number, f: { rating: number }) => acc + f.rating,
-    0
-  );
+  const sum = feedback.reduce((acc: number, f: { rating: number }) => acc + f.rating, 0);
   const averageRating = sum / totalReviews;
 
   const distribution = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };

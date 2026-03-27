@@ -1,4 +1,4 @@
-import apiClient from './api-client';
+import apiClient from "./api-client";
 
 export interface User {
   id: string;
@@ -69,17 +69,17 @@ export interface Feedback {
 // Authentication APIs
 export const authAPI = {
   register: async (data: RegisterRequest): Promise<AuthResponse> => {
-    const response = await apiClient.post('/auth/register', data);
+    const response = await apiClient.post("/auth/register", data);
     return response.data;
   },
 
   login: async (data: LoginRequest): Promise<AuthResponse> => {
-    const response = await apiClient.post('/auth/login', data);
+    const response = await apiClient.post("/auth/login", data);
     return response.data;
   },
 
   getCurrentUser: async (): Promise<User> => {
-    const response = await apiClient.get('/auth/me');
+    const response = await apiClient.get("/auth/me");
     return response.data.user;
   },
 };
@@ -87,7 +87,7 @@ export const authAPI = {
 // Courses APIs
 export const coursesAPI = {
   getAll: async (): Promise<Course[]> => {
-    const response = await apiClient.get('/courses');
+    const response = await apiClient.get("/courses");
     return response.data;
   },
 
@@ -97,7 +97,7 @@ export const coursesAPI = {
   },
 
   create: async (data: Partial<Course>): Promise<Course> => {
-    const response = await apiClient.post('/courses', data);
+    const response = await apiClient.post("/courses", data);
     return response.data;
   },
 
@@ -113,13 +113,16 @@ export const coursesAPI = {
 
 // Certificates APIs
 export const certificatesAPI = {
-  issue: async (data: { studentId: string; courseId: string }): Promise<Certificate> => {
-    const response = await apiClient.post('/certificates', data);
+  issue: async (data: {
+    studentId: string;
+    courseId: string;
+  }): Promise<Certificate> => {
+    const response = await apiClient.post("/certificates", data);
     return response.data;
   },
 
   getAll: async (): Promise<Certificate[]> => {
-    const response = await apiClient.get('/certificates');
+    const response = await apiClient.get("/certificates");
     return response.data;
   },
 
@@ -133,8 +136,12 @@ export const certificatesAPI = {
     return response.data;
   },
 
-  verifyOnChain: async (certificateId: string): Promise<{ verified: boolean; hash?: string }> => {
-    const response = await apiClient.get(`/certificates/${certificateId}/verify`);
+  verifyOnChain: async (
+    certificateId: string,
+  ): Promise<{ verified: boolean; hash?: string }> => {
+    const response = await apiClient.get(
+      `/certificates/${certificateId}/verify`,
+    );
     return response.data;
   },
 };
@@ -142,7 +149,7 @@ export const certificatesAPI = {
 // Enrollments APIs
 export const enrollmentsAPI = {
   getAll: async (): Promise<Enrollment[]> => {
-    const response = await apiClient.get('/enrollments');
+    const response = await apiClient.get("/enrollments");
     return response.data;
   },
 
@@ -152,7 +159,10 @@ export const enrollmentsAPI = {
   },
 
   enroll: async (studentId: string, courseId: string): Promise<Enrollment> => {
-    const response = await apiClient.post('/enrollments', { studentId, courseId });
+    const response = await apiClient.post("/enrollments", {
+      studentId,
+      courseId,
+    });
     return response.data;
   },
 
@@ -174,7 +184,7 @@ export const feedbackAPI = {
     rating: number;
     review?: string;
   }): Promise<Feedback> => {
-    const response = await apiClient.post('/feedback', data);
+    const response = await apiClient.post("/feedback", data);
     return response.data;
   },
 
@@ -184,7 +194,9 @@ export const feedbackAPI = {
   },
 
   getSummary: async (courseId: string): Promise<FeedbackSummary> => {
-    const response = await apiClient.get(`/feedback/course/${courseId}/summary`);
+    const response = await apiClient.get(
+      `/feedback/course/${courseId}/summary`,
+    );
     return response.data;
   },
 };
@@ -208,7 +220,7 @@ export interface StudentDashboard {
 
 export const dashboardAPI = {
   getStats: async (): Promise<DashboardStats> => {
-    const response = await apiClient.get('/dashboard/stats');
+    const response = await apiClient.get("/dashboard/stats");
     return response.data;
   },
 

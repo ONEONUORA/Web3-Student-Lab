@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { coursesAPI, enrollmentsAPI, certificatesAPI, Course } from '@/lib/api';
-import { useAuth } from '@/contexts/AuthContext';
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
+import { coursesAPI, enrollmentsAPI, certificatesAPI, Course } from "@/lib/api";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function CourseDetailPage() {
   const params = useParams();
@@ -26,12 +26,14 @@ export default function CourseDetailPage() {
         // Check if user is enrolled
         if (user) {
           const enrollments = await enrollmentsAPI.getByStudentId(user.id);
-          const enrolled = enrollments.some((enrollment) => enrollment.courseId === data.id);
+          const enrolled = enrollments.some(
+            (enrollment) => enrollment.courseId === data.id,
+          );
           setIsEnrolled(enrolled);
         }
       } catch (error) {
-        console.error('Failed to load course:', error);
-        router.push('/courses');
+        console.error("Failed to load course:", error);
+        router.push("/courses");
       } finally {
         setIsLoading(false);
       }
@@ -48,8 +50,8 @@ export default function CourseDetailPage() {
       await enrollmentsAPI.enroll(user.id, course.id);
       setIsEnrolled(true);
     } catch (error) {
-      console.error('Failed to enroll:', error);
-      alert('Failed to initialize connection. Please try again.');
+      console.error("Failed to enroll:", error);
+      alert("Failed to initialize connection. Please try again.");
     } finally {
       setIsEnrolling(false);
     }
@@ -62,10 +64,10 @@ export default function CourseDetailPage() {
       // The mock API requires an object mapping. Assuming certificatesAPI.issue accepts payload.
       await certificatesAPI.issue({ studentId: user.id, courseId: course.id });
       setMintSuccess(true);
-      setTimeout(() => router.push('/certificates'), 2000);
+      setTimeout(() => router.push("/certificates"), 2000);
     } catch (error) {
-      console.error('Failed to mint:', error);
-      alert('Failed to mint cryptographic token. It may already exist.');
+      console.error("Failed to mint:", error);
+      alert("Failed to mint cryptographic token. It may already exist.");
     } finally {
       setIsMinting(false);
     }
@@ -95,7 +97,9 @@ export default function CourseDetailPage() {
             href="/courses"
             className="text-red-500 hover:text-red-400 uppercase text-sm font-bold tracking-widest flex items-center justify-center gap-2 group"
           >
-            <span className="transform group-hover:-translate-x-1 transition-transform">←</span>{' '}
+            <span className="transform group-hover:-translate-x-1 transition-transform">
+              ←
+            </span>{" "}
             Return to Directory
           </Link>
         </div>
@@ -115,7 +119,9 @@ export default function CourseDetailPage() {
             href="/courses"
             className="text-gray-500 hover:text-red-500 uppercase text-xs font-bold tracking-widest mb-8 inline-flex items-center gap-2 group transition-colors"
           >
-            <span className="transform group-hover:-translate-x-1 transition-transform">←</span>{' '}
+            <span className="transform group-hover:-translate-x-1 transition-transform">
+              ←
+            </span>{" "}
             Network Directory
           </Link>
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
@@ -129,11 +135,13 @@ export default function CourseDetailPage() {
               <div className="flex flex-wrap items-center gap-6 text-gray-400 font-mono text-sm uppercase tracking-wider">
                 <span className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-gray-600"></span>
-                  Instructor: <span className="text-white">{course.instructor}</span>
+                  Instructor:{" "}
+                  <span className="text-white">{course.instructor}</span>
                 </span>
                 <span className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-red-600"></span>
-                  Payload: <span className="text-white">{course.credits} UNIT</span>
+                  Payload:{" "}
+                  <span className="text-white">{course.credits} UNIT</span>
                 </span>
               </div>
             </div>
@@ -148,11 +156,12 @@ export default function CourseDetailPage() {
           <div className="lg:col-span-2 space-y-8">
             <div className="bg-zinc-950 border border-white/10 rounded-2xl p-8 hover:border-red-500/30 transition-colors">
               <h2 className="text-2xl font-black text-white mb-6 uppercase tracking-widest flex items-center gap-3">
-                <span className="w-4 h-4 bg-red-600 rounded-sm inline-block"></span> Protocol
-                Specifications
+                <span className="w-4 h-4 bg-red-600 rounded-sm inline-block"></span>{" "}
+                Protocol Specifications
               </h2>
               <p className="text-gray-400 font-light text-lg leading-relaxed mb-8">
-                {course.description || 'System metadata missing. Awaiting curriculum upload.'}
+                {course.description ||
+                  "System metadata missing. Awaiting curriculum upload."}
               </p>
 
               <div className="border-t border-white/10 pt-8 mt-8">
@@ -176,7 +185,9 @@ export default function CourseDetailPage() {
                         />
                       </svg>
                     </div>
-                    <span>Mastery of core decentralized computing paradigms</span>
+                    <span>
+                      Mastery of core decentralized computing paradigms
+                    </span>
                   </li>
                   <li className="flex items-start gap-4 text-gray-400">
                     <div className="w-6 h-6 rounded bg-red-500/10 flex items-center justify-center flex-shrink-0 border border-red-500/20 mt-0.5">
@@ -194,7 +205,9 @@ export default function CourseDetailPage() {
                         />
                       </svg>
                     </div>
-                    <span>Direct compilation and deployment of Soroban contracts</span>
+                    <span>
+                      Direct compilation and deployment of Soroban contracts
+                    </span>
                   </li>
                   <li className="flex items-start gap-4 text-gray-400">
                     <div className="w-6 h-6 rounded bg-red-500/10 flex items-center justify-center flex-shrink-0 border border-red-500/20 mt-0.5">
@@ -212,7 +225,9 @@ export default function CourseDetailPage() {
                         />
                       </svg>
                     </div>
-                    <span>Secure state manipulation on the Stellar testnet</span>
+                    <span>
+                      Secure state manipulation on the Stellar testnet
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -265,8 +280,9 @@ export default function CourseDetailPage() {
 
                   <div className="pt-6 border-t border-white/10">
                     <p className="text-gray-400 text-sm font-light mb-4">
-                      Completed the curriculum? Execute the smart contract below to mint your
-                      verifiable credential on the Stellar blockchain.
+                      Completed the curriculum? Execute the smart contract below
+                      to mint your verifiable credential on the Stellar
+                      blockchain.
                     </p>
 
                     {mintSuccess ? (
@@ -284,11 +300,11 @@ export default function CourseDetailPage() {
                         disabled={isMinting}
                         className={`w-full py-4 rounded-xl font-black uppercase tracking-widest transition-all shadow-[0_0_15px_rgba(220,38,38,0.3)] ${
                           isMinting
-                            ? 'bg-red-900 text-gray-500 cursor-not-allowed border border-red-900'
-                            : 'bg-red-600 hover:bg-red-700 text-white hover:shadow-[0_0_30px_rgba(220,38,38,0.6)] transform hover:-translate-y-0.5'
+                            ? "bg-red-900 text-gray-500 cursor-not-allowed border border-red-900"
+                            : "bg-red-600 hover:bg-red-700 text-white hover:shadow-[0_0_30px_rgba(220,38,38,0.6)] transform hover:-translate-y-0.5"
                         }`}
                       >
-                        {isMinting ? 'Compiling tx...' : 'Extract Certificate'}
+                        {isMinting ? "Compiling tx..." : "Extract Certificate"}
                       </button>
                     )}
                   </div>
@@ -300,11 +316,15 @@ export default function CourseDetailPage() {
                     disabled={isEnrolling || !user}
                     className={`w-full py-5 rounded-xl font-black uppercase tracking-widest transition-all ${
                       isEnrolling || !user
-                        ? 'bg-gray-800 text-gray-500 cursor-not-allowed border border-white/10'
-                        : 'bg-white text-black hover:bg-gray-200 transform hover:-translate-y-0.5 shadow-[0_0_20px_rgba(255,255,255,0.2)]'
+                        ? "bg-gray-800 text-gray-500 cursor-not-allowed border border-white/10"
+                        : "bg-white text-black hover:bg-gray-200 transform hover:-translate-y-0.5 shadow-[0_0_20px_rgba(255,255,255,0.2)]"
                     }`}
                   >
-                    {isEnrolling ? 'Connecting...' : !user ? 'Auth Required' : 'Initialize Module'}
+                    {isEnrolling
+                      ? "Connecting..."
+                      : !user
+                        ? "Auth Required"
+                        : "Initialize Module"}
                   </button>
                   <p className="text-xs text-gray-500 font-mono mt-6 text-center">
                     NO GAS FEES • PUBLIC TESTNET

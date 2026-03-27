@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState, useRef } from 'react';
-import Link from 'next/link';
+import { useEffect, useState, useRef } from "react";
+import Link from "next/link";
 
 interface Transaction {
   id: string;
@@ -9,7 +9,7 @@ interface Transaction {
   op: string;
   amount?: string;
   asset?: string;
-  status: 'SUCCESS' | 'PENDING' | 'FAILED';
+  status: "SUCCESS" | "PENDING" | "FAILED";
   time: string;
 }
 
@@ -36,7 +36,8 @@ export default function SimulatorPage() {
         const newLedger: Ledger = {
           sequence: (ledgers[0]?.sequence || 524000) + 1,
           txCount: Math.floor(Math.random() * 15) + 1,
-          hash: Math.random().toString(16).substring(2, 10).toUpperCase() + '...',
+          hash:
+            Math.random().toString(16).substring(2, 10).toUpperCase() + "...",
           time: new Date().toLocaleTimeString(),
         };
         setLedgers((prev) => [newLedger, ...prev].slice(0, 10));
@@ -44,20 +45,23 @@ export default function SimulatorPage() {
         // Generate transactions for this ledger
         for (let i = 0; i < newLedger.txCount; i++) {
           const ops = [
-            'PAYMENT',
-            'MANAGE_OFFER',
-            'CHANGE_TRUST',
-            'INVOKE_HOST_FUNCTION',
-            'CREATE_ACCOUNT',
+            "PAYMENT",
+            "MANAGE_OFFER",
+            "CHANGE_TRUST",
+            "INVOKE_HOST_FUNCTION",
+            "CREATE_ACCOUNT",
           ];
-          const assets = ['XLM', 'USDC', 'EURC', 'AQUA'];
+          const assets = ["XLM", "USDC", "EURC", "AQUA"];
           const newTx: Transaction = {
             id: Math.random().toString(36).substring(2, 9).toUpperCase(),
-            source: 'G' + Math.random().toString(36).substring(2, 12).toUpperCase() + '...',
+            source:
+              "G" +
+              Math.random().toString(36).substring(2, 12).toUpperCase() +
+              "...",
             op: ops[Math.floor(Math.random() * ops.length)],
             amount: (Math.random() * 1000).toFixed(2),
             asset: assets[Math.floor(Math.random() * assets.length)],
-            status: Math.random() > 0.05 ? 'SUCCESS' : 'FAILED',
+            status: Math.random() > 0.05 ? "SUCCESS" : "FAILED",
             time: new Date().toLocaleTimeString(),
           };
           setTransactions((prev) => [newTx, ...prev].slice(0, 50));
@@ -87,17 +91,17 @@ export default function SimulatorPage() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2 px-4 py-2 bg-zinc-900 border border-white/10 rounded">
               <div
-                className={`w-2 h-2 rounded-full ${isLive ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}
+                className={`w-2 h-2 rounded-full ${isLive ? "bg-green-500 animate-pulse" : "bg-red-500"}`}
               ></div>
               <span className="text-[10px] uppercase font-bold tracking-widest">
-                {isLive ? 'Live Feed' : 'Paused'}
+                {isLive ? "Live Feed" : "Paused"}
               </span>
             </div>
             <button
               onClick={() => setIsLive(!isLive)}
               className="px-4 py-2 bg-white text-black text-[10px] font-black uppercase tracking-widest hover:bg-gray-200 transition-colors"
             >
-              {isLive ? 'Stop Sync' : 'Start Sync'}
+              {isLive ? "Stop Sync" : "Start Sync"}
             </button>
           </div>
         </div>
@@ -107,11 +111,15 @@ export default function SimulatorPage() {
           <div className="lg:col-span-1 bg-zinc-950 border border-white/10 p-6 rounded-2xl flex flex-col shadow-2xl">
             <h3 className="text-sm font-bold border-b border-white/10 pb-4 mb-6 uppercase tracking-widest flex items-center justify-between">
               Ledger Chain
-              <span className="text-[10px] text-gray-600 font-normal">History [10]</span>
+              <span className="text-[10px] text-gray-600 font-normal">
+                History [10]
+              </span>
             </h3>
             <div className="space-y-4 overflow-y-auto pr-2 custom-scrollbar">
               {ledgers.length === 0 && (
-                <p className="text-gray-700 italic text-xs">Awaiting first ledger pulse...</p>
+                <p className="text-gray-700 italic text-xs">
+                  Awaiting first ledger pulse...
+                </p>
               )}
               {ledgers.map((l) => (
                 <div
@@ -119,12 +127,15 @@ export default function SimulatorPage() {
                   className="p-4 bg-black border-l-2 border-red-600 border-r border-t border-b border-white/5 rounded-r group hover:border-red-500/50 transition-colors"
                 >
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-red-500 font-black text-sm">#{l.sequence}</span>
+                    <span className="text-red-500 font-black text-sm">
+                      #{l.sequence}
+                    </span>
                     <span className="text-[10px] text-gray-500">{l.time}</span>
                   </div>
                   <div className="flex justify-between text-[10px]">
                     <span className="text-gray-400">
-                      TXS: <span className="text-white italic">{l.txCount}</span>
+                      TXS:{" "}
+                      <span className="text-white italic">{l.txCount}</span>
                     </span>
                     <span className="text-gray-600 font-mono">{l.hash}</span>
                   </div>
@@ -137,7 +148,9 @@ export default function SimulatorPage() {
           <div className="lg:col-span-2 bg-zinc-950 border border-white/10 p-6 rounded-2xl flex flex-col shadow-2xl min-h-[500px]">
             <h3 className="text-sm font-bold border-b border-white/10 pb-4 mb-6 uppercase tracking-widest flex items-center justify-between">
               Transaction Stream
-              <span className="text-[10px] text-gray-600 font-normal">Active Memory [50]</span>
+              <span className="text-[10px] text-gray-600 font-normal">
+                Active Memory [50]
+              </span>
             </h3>
             <div className="flex-grow overflow-x-auto">
               <table className="w-full text-left text-[11px] border-collapse">
@@ -152,19 +165,27 @@ export default function SimulatorPage() {
                 </thead>
                 <tbody className="divide-y divide-white/5">
                   {transactions.map((tx) => (
-                    <tr key={tx.id} className="group hover:bg-white/5 transition-colors">
-                      <td className="py-3 text-red-500 font-bold tracking-tighter">{tx.id}</td>
+                    <tr
+                      key={tx.id}
+                      className="group hover:bg-white/5 transition-colors"
+                    >
+                      <td className="py-3 text-red-500 font-bold tracking-tighter">
+                        {tx.id}
+                      </td>
                       <td className="py-3 font-bold text-gray-300">{tx.op}</td>
                       <td className="py-3 font-mono">
-                        {tx.amount} <span className="text-gray-600">{tx.asset}</span>
+                        {tx.amount}{" "}
+                        <span className="text-gray-600">{tx.asset}</span>
                       </td>
-                      <td className="py-3 text-gray-500 text-[10px]">{tx.source}</td>
+                      <td className="py-3 text-gray-500 text-[10px]">
+                        {tx.source}
+                      </td>
                       <td className="py-3 text-right">
                         <span
                           className={`px-2 py-0.5 rounded text-[9px] font-black ${
-                            tx.status === 'SUCCESS'
-                              ? 'bg-green-500/10 text-green-500 border border-green-500/30'
-                              : 'bg-red-500/10 text-red-500 border border-red-500/30'
+                            tx.status === "SUCCESS"
+                              ? "bg-green-500/10 text-green-500 border border-green-500/30"
+                              : "bg-red-500/10 text-red-500 border border-red-500/30"
                           }`}
                         >
                           {tx.status}
@@ -174,9 +195,12 @@ export default function SimulatorPage() {
                   ))}
                   {transactions.length === 0 && (
                     <tr>
-                      <td colSpan={5} className="py-10 text-center text-gray-700 italic">
-                        No incoming packets detected. Sync with global nodes to start data
-                        reception.
+                      <td
+                        colSpan={5}
+                        className="py-10 text-center text-gray-700 italic"
+                      >
+                        No incoming packets detected. Sync with global nodes to
+                        start data reception.
                       </td>
                     </tr>
                   )}

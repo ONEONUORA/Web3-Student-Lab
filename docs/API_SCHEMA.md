@@ -392,9 +392,5 @@ interface PaginatedResponse<T> {
 }
 ```
 
-<<<<<<< HEAD
 This schema ensures consistent, predictable API responses that are easy to consume by frontend
 applications and third-party integrations.
-=======
-This schema ensures consistent, predictable API responses that are easy to consume by frontend applications and third-party integrations.
->>>>>>> main
