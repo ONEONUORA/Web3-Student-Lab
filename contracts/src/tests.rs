@@ -144,7 +144,8 @@ fn verifies_event_emitted_per_student() {
     let mut cert_issued_count = 0u32;
     for (addr, topics, _) in all_events.iter() {
         if addr == client.address
-            && Symbol::from_val(&env, &topics.get(0).unwrap()) == Symbol::new(&env, "v1_cert_issued")
+            && Symbol::from_val(&env, &topics.get(0).unwrap())
+                == Symbol::new(&env, "v1_cert_issued")
         {
             cert_issued_count += 1;
         }
@@ -845,8 +846,8 @@ fn batch_issue_gas_efficiency() {
         "BATCH9",
     ];
 
-    for i in 0..10 {
-        symbols.push_back(Symbol::new(&env, symbol_names[i]));
+    for name in &symbol_names {
+        symbols.push_back(Symbol::new(&env, name));
         students.push_back(Address::generate(&env));
     }
 

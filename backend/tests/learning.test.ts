@@ -84,7 +84,9 @@ describe('Learning Module Integration Tests', () => {
     });
 
     it('returns 404 when the course does not exist', async () => {
-      const response = await request(app).get('/api/v1/learning/courses/unknown-course').expect(404);
+      const response = await request(app)
+        .get('/api/v1/learning/courses/unknown-course')
+        .expect(404);
 
       expect(response.body.error).toBe('Course not found');
     });

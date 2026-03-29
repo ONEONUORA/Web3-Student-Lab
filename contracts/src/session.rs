@@ -32,9 +32,7 @@ impl SessionVerificationContract {
         let hash: [u8; 32] = env.crypto().sha256(&msg).into();
 
         // Take first 16 bytes of the 32-byte hash
-        for i in 0..16 {
-            session_bytes[i] = hash[i];
-        }
+        session_bytes.copy_from_slice(&hash[..16]);
 
         let session_code = BytesN::from_array(&env, &session_bytes);
 
@@ -68,13 +66,7 @@ impl SessionVerificationContract {
         match stored_code {
             Some(code) => {
                 // Check if the provided code matches the stored one
-                let is_valid = code == provided_code;
-
-                // Optional: Once verified, you might want to remove it to prevent reuse,
-                // but the requirement says "temporary storage" handles expiration.
-                // We'll leave it for now so it can be verified multiple times within its TTL.
-
-                is_valid
+                code == provided_code
             }
             None => false, // Expired or not found
         }
