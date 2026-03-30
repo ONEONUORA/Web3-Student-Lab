@@ -142,13 +142,41 @@ fn verifies_event_emitted_per_student() {
     let mut cert_issued_count = 0u32;
     for (addr, topics, _) in all_events.iter() {
         if addr == client.address
-            && Symbol::from_val(&env, &topics.get(0).unwrap()) == Symbol::new(&env, "v1_cert_issued")
+            && Symbol::from_val(&env, &topics.get(0).unwrap())
+                == Symbol::new(&env, "v1_cert_issued")
         {
             cert_issued_count += 1;
         }
     }
 
     assert_eq!(cert_issued_count, 2);
+}
+
+#[test]
+fn gets_certificates_by_student_across_courses() {
+    let (env, instructor, _, _, client) = setup();
+
+    let student = Address::generate(&env);
+    let course_name = String::from_str(&env, "Soroban");
+
+    client.issue(
+        &instructor,
+        &symbol_short!("RUST"),
+        &vec![&env, student.clone()],
+        &course_name,
+    );
+    client.issue(
+        &instructor,
+        &symbol_short!("WEB3"),
+        &vec![&env, student.clone()],
+        &course_name,
+    );
+
+    let certificates = client.get_certificates_by_student(&student);
+
+    assert_eq!(certificates.len(), 2);
+    assert_eq!(certificates.get(0).unwrap().student, student);
+    assert_eq!(certificates.get(1).unwrap().student, student);
 }
 
 #[test]
@@ -740,11 +768,7 @@ fn batch_issue_emits_events() {
     let (env, instructor, _, _, client) = setup();
 
     let symbols = vec![&env, symbol_short!("EVENT"), symbol_short!("EVENT2")];
-    let students = vec![
-        &env,
-        Address::generate(&env),
-        Address::generate(&env),
-    ];
+    let students = vec![&env, Address::generate(&env), Address::generate(&env)];
     let course_name = String::from_str(&env, "Event Test");
 
     client.batch_issue(&instructor, &symbols, &students, &course_name);
@@ -774,11 +798,13 @@ fn batch_issue_gas_efficiency() {
     let mut students = Vec::new(&env);
 
     // Create 10 different symbols without using format macro
-    let symbol_names = ["BATCH0", "BATCH1", "BATCH2", "BATCH3", "BATCH4",
-                         "BATCH5", "BATCH6", "BATCH7", "BATCH8", "BATCH9"];
+    let symbol_names = [
+        "BATCH0", "BATCH1", "BATCH2", "BATCH3", "BATCH4", "BATCH5", "BATCH6", "BATCH7", "BATCH8",
+        "BATCH9",
+    ];
 
-    for i in 0..10 {
-        symbols.push_back(Symbol::new(&env, symbol_names[i]));
+    for symbol_name in symbol_names {
+        symbols.push_back(Symbol::new(&env, symbol_name));
         students.push_back(Address::generate(&env));
     }
 
