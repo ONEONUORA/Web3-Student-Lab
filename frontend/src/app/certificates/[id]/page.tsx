@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { certificatesAPI, Certificate } from "@/lib/api";
-import { useAuth } from "@/contexts/AuthContext";
+// import { useAuth } from "@/contexts/AuthContext"; // Reserved for future auth features
 
 export default function CertificateNFTPage() {
   const params = useParams();
   const router = useRouter();
-  const { user } = useAuth();
+  // const { user } = useAuth(); // Uncomment when user context is needed
   const [certificate, setCertificate] = useState<Certificate | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isVerifying, setIsVerifying] = useState(false);

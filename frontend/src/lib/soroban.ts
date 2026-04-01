@@ -1,9 +1,7 @@
 import {
   StrKey,
   rpc,
-  Contract,
-  xdr,
-  scValToNative,
+  // Contract, xdr, scValToNative - reserved for future contract interactions
 } from "@stellar/stellar-sdk";
 
 const SOROBAN_RPC_URL =

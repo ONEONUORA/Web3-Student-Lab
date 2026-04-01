@@ -16,7 +16,7 @@ export default function DashboardPage() {
   const { user, logout } = useAuth();
   const [courses, setCourses] = useState<Course[]>([]);
   const [certificates, setCertificates] = useState<Certificate[]>([]);
-  const [enrollments, setEnrollments] = useState<Enrollment[]>([]);
+  const [_enrollments, setEnrollments] = useState<Enrollment[]>([]); // eslint-disable-line @typescript-eslint/no-unused-vars
   const [isLoading, setIsLoading] = useState(true);
   const [stats, setStats] = useState({
     totalCourses: 0,

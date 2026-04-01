@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 
 interface Transaction {
   id: string;
@@ -24,7 +23,7 @@ export default function SimulatorPage() {
   const [ledgers, setLedgers] = useState<Ledger[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLive, setIsLive] = useState(true);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  // const scrollRef = useRef<HTMLDivElement>(null); // Reserved for future scroll functionality
 
   // Generate fake live data
   useEffect(() => {
